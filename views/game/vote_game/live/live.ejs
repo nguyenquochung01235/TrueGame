@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOTE GAME</title>
+    <link rel="stylesheet" href="/template/css/live.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/template/plugins/fontawesome-free/css/all.min.css">
+</head>
+<body>
+    <div class="loading">
+        <img src="/template/image/vote.png" alt="">
+        <p>LIVE | VOTE GAME</p>
+    </div>
+    <div class="no_container">
+        <h1>KHÔNG CÓ SỰ KIỆN NÀO ĐANG DIỄN RA</h1>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="title">
+                <h1 id="title_current_game">TITLE OF CURRENT GAME</h1>
+            </div>
+        </div>
+        <div class="content">
+            
+            <div class="total_status">
+                <h3>THỐNG KÊ</h3>
+                <div class="current_status">
+                    <div class="status_component">
+                        <div class="status_icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="status_infor">
+                            <h4>Người Xem</h4>
+                            <h4 id="number_viewer">100</h1>
+                        </div>
+                    </div>
+                    <div class="status_component">
+                        <div class="status_icon">
+                            <i class="fas fa-thumbs-up"></i>
+                        </div>
+                        <div class="status_infor">
+                            <h4>Bình Chọn</h4>
+                            <h4 id="number_vote">100</h1>
+                        </div>
+                    </div>
+                    <div class="status_component">
+                        <div class="status_icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="status_infor">
+                            <h4>Giám Khảo</h4>
+                            <h4 id="number_examiner">100</h1>
+                        </div>
+                    </div>
+                    <div class="status_component">
+                        <div class="status_icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="status_infor">
+                            <h4>Thí Sinh</h4>
+                            <h4 id="number_candidate">100</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="current_candidate">
+              
+                <div class="candidate">
+                    <!-- <img id="avatar_candidate" src="/template/image/bca40ca5-82e5-470e-aab1-34fa5ddde42a.png" alt=""> -->
+                    <div class="candidate_infor">
+                        <h3 id="candidate_title">Candidate title of current game</h3>
+                        <p id="candidate_fullname">Candidate Fullname</p>
+                    </div>
+                </div>
+                <div class="point_infor">
+                    <div class="candidate_point_component">
+                        <img src="/template/image/ten_point.png" alt="">
+                        <h3 id="candidate_point">Tổng điểm: 9</h3>
+                    </div>
+                    <div class="candidate_vote_component">
+                        <img src="/template/image/vote_icon.webp" alt="">
+                        <h3 id="candidate_vote">Tổng bình chọn: 9</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="no_current_candidate">
+                <div class="current_candidate_header">
+                    <h3>Phần Thi</h3>
+                </div>
+                <div class="candidate">
+                   <h2>Chưa có phần thi nào đang diễn ra</h1>   
+                </div>
+            </div>
+            
+        </div>
+        <div class="footer">
+            <div class="current_examiner">
+                <div class="current_examiner_header">
+                    <h3>ĐIỂM</h3>
+                </div>
+                <div class="list_examiner">
+                   
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/template/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="/template/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/template/js/live.js"></script>
+</body>
+</html>

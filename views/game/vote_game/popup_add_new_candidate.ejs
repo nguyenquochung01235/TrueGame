@@ -1,0 +1,57 @@
+<div id="popup_add_new_candidate">
+    <div class="container-fluid">
+      <div class="row mt-2" style="justify-content: center !important;">
+        <!-- left column -->
+        <div class="col-md-5" >
+            <!-- general form elements -->
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Tạo Thí Sinh Mới</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-success btn-sm" id="add_new_candidate_close_btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id="form_add_new_candidate">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <img id="review_avatar"  src="/template/dist/img/default-150x150.png" alt="" width="150px" height="150px">
+                            <label class="btn btn-success mt-2" style="width: 150px;" id="candidate_avatar_upload" for="avatar">
+                                Chọn avatar
+                            </label>
+                            <input accept="image/*" id="avatar" name="avatar" type="file" hidden>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Tên thí sinh</label>
+                            <input type="text" required class="form-control" id="fullname"
+                                placeholder="Nhập tên thí sinh">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Tiết mục dự thi</label>
+                            <input type="text" required class="form-control" id="title"
+                                placeholder="Nhập tiết mục dự thi">
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Danh sách chọn</label>
+                            <div class="form-controll"  style="display: flex;align-items: baseline;">
+                                <input type="checkbox" name="type" id="type">
+                                <p style="margin-left: 5px;">List type (Danh sách bình chọn cuối cuộc thi)</p>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" id="submit_form_add_new_candidate" class="btn btn-success col-sm-3 float-right">Thêm thí sinh mới</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </div>

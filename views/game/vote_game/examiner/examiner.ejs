@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXAMINER | VOTE GAME</title>
+    <link rel="stylesheet" href="/template/css/examiner.css">
+</head>
+<body>
+    <div class="loading">
+        <img src="/template/image/vote.png" alt="">
+        <p>EXAMINER | VOTE GAME</p>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="header_infor">
+                <div class="avatar">
+                    <img id="infor_examiner_avatar" src="/template/image/default-150x150.png" alt="">
+                </div>
+                <div class="infor_examiner">
+                    <h3 id="infor_examiner_fullname">Fullname Examiner</h3>
+                    <p id="infor_examiner_title">Examiner title position</p>
+                </div>
+            </div>
+            <div class="header_menu">
+                <div class="logout" id="logout">
+                    <img src="/template/image/logout.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div id="exam_title">
+                <h3>The Current Game Title</h3>
+            </div>
+            <div class="current_exam" id="have_current_candidate">
+                <h4>Tiết mục đang trình diễn</h4>
+                <div class="infor_candidate">
+                    <div id="candidate_avatar">
+                        <img src="/template/image/default-150x150.png" alt="">
+                    </div>
+                    <div id="candidate_infor">
+                        <h3>Candidate Fullname</h3>
+                        <p>Candidate Exam Title</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="current_exam" id="not_have_current_candidate">
+                <h4>Tiết mục đang trình diễn</h4>
+                <div class="infor_candidate">
+                    <div id="candidate_infor">
+                        <h3>Không có phần thi nào đang diễn ra</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="examiner_point">
+                <h3>Chấm Điểm Phần Thi</h3>
+                <div class="point_caculator">
+                    <button class="point_button" id="special_point_button" tabindex="10" data-point="10">10</button>
+                    <div class="row_point">
+                        <button class="point_button" tabindex="9" data-point="9">9</button>
+                        <button class="point_button" tabindex="8" data-point="8">8</button>
+                        <button class="point_button" tabindex="7" data-point="7">7</button>
+                    </div>
+                    <div class="row_point"> 
+                        <button class="point_button" data-point="6">6</button>
+                        <button class="point_button" data-point="5">5</button>
+                        <button class="point_button" data-point="4">4</button>
+                    </div>
+                    <div class="row_point">
+                        <button class="point_button" data-point="3">3</button>
+                        <button class="point_button" data-point="2">2</button>
+                        <button class="point_button" data-point="1">1</button>
+                    </div>
+                <button class="submit_btn" id="submit">Xác Nhận</button>
+                    
+                </div>
+                <div class="point_view">
+                    <h1>Point</h1>
+                </div>
+                <button class="togle_caculator" id="down_caculator_button">&downarrow;</button>
+                <button class="togle_caculator" id="up_caculator_button">&uparrow;</button>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+<script src="/template/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="/template/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/template/js/examiner.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+</body>
+</html>

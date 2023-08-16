@@ -1,0 +1,159 @@
+body {
+    background-image: url("/template/image/landing_background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.342);
+}
+
+.header {
+    padding-top: 2%;
+    width: 100%;
+    text-align: center;
+}
+
+#title {
+    -webkit-text-stroke: 1px rgb(255, 255, 255);
+    color: orange;
+    font-size: 80px;
+    letter-spacing: 3px;
+    word-spacing: 10px;
+    /* animation: fade-in 1s; */
+
+}
+.content {
+    justify-content: center;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+}
+
+.game_layout {
+    margin: 20px;
+    display: grid;
+    justify-content: center;
+    width: 400px;
+    height: 300px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    align-items: center;
+    justify-items: center;
+    transition: ease-in 0.5s;
+    animation: fade-in 1s;
+}
+
+
+.game_image {
+    width: 220px;
+    height: 220px;
+}
+
+#spin_thumb {
+    width: 220px;
+    height: 220px;
+    transition: width 2s, height 2s, transform 2s;
+}
+#vote_thumb {
+    width: 220px;
+    height: 220px;
+    transition: width 1s, height 1s, transform 1s;
+}
+
+.game_button {
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    margin-top: 20px;
+    text-align: center;
+    width: 380px;
+    height: 60px;
+    line-height: 60px;
+    border: none;
+    background-color: rgb(248, 180, 54);
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+
+.game_layout:hover{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.game_layout:hover > #spin_thumb {
+    transform: rotate(1turn);
+}
+
+.game_layout:hover > #vote_thumb {
+    transform: rotate(-20deg);
+}
+
+.game_layout:hover > .game_button {
+    background-color: orange;
+
+}
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+    #title {
+        height: 100px;
+        font-size: 50px;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .game_layout {
+        width: 320px;
+        height: 270px;
+    }
+
+    .game_image{
+        width: 200px;
+        height: 200px;
+    }
+    .game_button {
+        margin-top: 20px;
+        text-align: center;
+        width: 300px;
+        height: 60px;
+        font-size: 25px;
+    }
+
+    #spin_thumb {
+        width: 200px;
+        height: 200px;
+    }
+    #vote_thumb {
+        width: 200px;
+        height: 200px;
+    }
+
+    .game_layout:hover{
+        margin-top: 0px;
+    }
+}
+
+
+
+
+@keyframes fade-in {
+    from {
+      opacity: 0;
+      margin-top: -100px;
+    }
+    to {
+      margin-top: 20px;
+      opacity: 1;
+    }
+  }

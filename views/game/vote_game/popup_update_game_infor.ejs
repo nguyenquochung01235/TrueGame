@@ -1,0 +1,44 @@
+<div id="popup_update_game">
+    <div class="container-fluid">
+      <div class="row mt-2" style="justify-content: center !important;">
+        <!-- left column -->
+        <div class="col-md-5" >
+            <!-- general form elements -->
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Cập Nhật Thông Tin Cuộc Thi</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-success btn-sm" id="update_game_infor_close_btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id="form_update_game">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="name_game">Tên cuộc thi </label>
+                            <input type="text" required class="form-control" id="name_game"
+                                placeholder="Nhập tên cuộc thi" value="<%- gameData.game.name_game %>">
+                        </div>
+                        <div class="form-group">
+                            <label id="upload_label" for="input_background" style="background-image: url('<%- gameData.game.background %>') ;">
+                                <img src="/template/image/img_upload_icon.png" alt="">
+                                Chọn ảnh Background
+                            </label>
+                            <input accept="image/*" id="input_background" name="input_background" type="file" hidden>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" id="submit_form_update_game" class="btn btn-success col-sm-3 float-right">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIEWER | VOTE GAME</title>
+    <link rel="stylesheet" href="/template/css/viewer.css">
+</head>
+<body>
+    <div class="loading">
+        <img src="/template/image/vote.png" alt="">
+        <p>VIEWER | VOTE GAME</p>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="header_infor">
+                <div id="exam_title">
+                    <h1></h1>
+                    <h3>Chưa Có Cuộc Thi Nào Đang Diễn Ra</h3>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            
+            <div class="current_exam" id="have_current_candidate">
+                <h4>Tiết mục đang trình diễn</h4>
+                <div class="infor_candidate">
+                    <div id="candidate_avatar">
+                        <img src="/template/image/default-150x150.png" alt="">
+                    </div>
+                    <div id="candidate_infor">
+                        <h3>Candidate Fullname</h3>
+                        <p>Candidate Exam Title</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="current_exam" id="not_have_current_candidate">
+                <h4>Tiết mục đang trình diễn</h4>
+                <div class="infor_candidate">
+                    <div id="candidate_infor">
+                        <h3>Không có phần thi nào đang diễn ra</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="viewer_vote">
+                <h3>Vote Cho Phần Thi</h3>
+                <div class="vote" id="vote_btn">
+                    <img width="120px" src="/template/image/vote.png" alt="">
+                </div>
+                <div class="vote-disable">
+                    <h4>Cảm ơn bạn đã bình chọn thí sinh này</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+<script src="/template/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="/template/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/template/js/viewer.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+</body>
+</html>

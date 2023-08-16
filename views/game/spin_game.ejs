@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <link rel="stylesheet" href="template/css/spin_game.css">
+    <link rel="stylesheet" href="template/css/tab_bar.css">
+</head>
+<body>
+
+    <%- include('tab_bar'); -%>
+    <div id="input_tab">
+       <div class="menu_input">
+        <div class="input_field">
+            <textarea name="data" id="data_edit"></textarea>
+            <button id="submit_data">Create new data</button>
+            <div class="group_option">
+               <div class="input_option">
+                    <input checked type="checkbox" name="duplicate" id="duplicate" >
+                    <p>Duplicate</p>
+               </div>
+               <div class="input_option">
+                    <input checked type="checkbox" name="arrow" id="arrow" >
+                    <p>Arrow</p>
+               </div>
+               <div class="input_option">
+                    <input checked type="checkbox" name="congratulation" id="congratulation" >
+                    <p>Congratulation</p>
+               </div>
+            </div>
+            <button id="clear_data">Clear data</button>
+        </div>
+        <div class="input_menu">
+            <button id="close_input_tab">Close Spin Setting</button>
+        </div>
+       </div>
+    </div>
+
+    <div id="container_background">
+        <div class="header" id="header">
+            <button id="open_button">Menu Bar</button>
+            <h1 class="title">SPIN GAME</h1>
+            <button id="open_input">Spin Setting</button>
+
+        </div>
+        <div class="game_zone">
+            <div id="spine_zone">
+                <div id="chart"></div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="result_list">
+        <div id="result_header">
+        <h3>Danh sách kết quả</h3>
+        <button id="hidden_result">></button>
+        </div>
+        <ul id=result_list_item>
+        </ul>
+    </div>
+
+    <div id="result_list_hidden">
+        <button id="show_result"><</button>
+    </div>
+
+    <div id="result_alert">
+        <img src="template/image/congrate.gif" alt="">
+        <div id="result_popup">
+            <h3>Xin Chúc Mừng</h3>
+            <p id="result">asdkhjaksdhaksjdahsk</p>
+            <button id="close_result">Đóng</button>
+        </div>
+    </div>
+    
+    <div class="full_screen">
+        <input type="checkbox" name="full_screen" id="full_screen">
+        <p>Full Screen</p>
+    </div>
+
+    <script src="template/js/d3.v3.min.js" charset="utf-8"></script>
+    <script src="template/js/spin_game.js"></script>
+
+   
+</body>
+</html>

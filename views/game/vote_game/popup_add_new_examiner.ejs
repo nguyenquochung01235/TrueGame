@@ -1,0 +1,60 @@
+<div id="popup_add_new_examiner">
+    <div class="container-fluid">
+      <div class="row mt-2" style="justify-content: center !important;">
+        <!-- left column -->
+        <div class="col-md-5" >
+            <!-- general form elements -->
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Tạo Giám Khảo Mới</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-success btn-sm" id="add_new_examiner_close_btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id="form_add_new_examiner">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <img id="review_avatar_examiner"  src="/template/dist/img/default-150x150.png" alt="" width="150px" height="150px">
+                            <label class="btn btn-success mt-2" style="width: 150px;" id="examiner_avatar_upload" for="examiner_avatar">
+                                Chọn avatar
+                            </label>
+                            <input accept="image/*" id="examiner_avatar" name="examiner_avatar" type="file" hidden>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Tên giám khảo</label>
+                            <input type="text" required class="form-control" id="fullname"
+                                placeholder="Nhập tên giám khảo">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Chức danh</label>
+                            <input type="text" required class="form-control" id="title"
+                                placeholder="Nhập chức danh">
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Username</label>
+                            <input type="text" required class="form-control" id="username"
+                                placeholder="Nhập tên đăng nhập">
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Password</label>
+                            <input type="password" required class="form-control" id="password"
+                                placeholder="Nhập mật khẩu">
+                        </div>
+                       
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" id="submit_form_add_new_examiner" class="btn btn-success col-sm-4 float-right">Thêm giám khảo mới</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </div>

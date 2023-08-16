@@ -1,0 +1,53 @@
+<div id="popup_update_candidate">
+    <div class="container-fluid">
+      <div class="row mt-2" style="justify-content: center !important;">
+        <!-- left column -->
+        <div class="col-md-5" >
+            <!-- general form elements -->
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Cập Nhật Thông Tin Thí Sinh</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-success btn-sm" id="update_candidate_close_btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id="form_update_candidate">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <img id="review_avatar_update"  src="/template/dist/img/default-150x150.png" alt="" width="150px" height="150px">
+                            <label class="btn btn-success mt-2" style="width: 150px;" id="candidate_avatar_upload" for="avatar_update">
+                                Chọn avatar
+                            </label>
+                            <input accept="image/*" id="avatar_update" name="avatar_update" type="file" hidden>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" required class="form-control" id="id_candidate" hidden>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Tên thí sinh</label>
+                            <input type="text" required class="form-control" id="fullname"
+                                placeholder="Nhập tên thí sinh">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Tiết mục dự thi</label>
+                            <input type="text" required class="form-control" id="title"
+                                placeholder="Nhập tiết mục dự thi">
+                        </div>
+                       
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" id="submit_form_update_candidate" class="btn btn-success col-sm-3 float-right">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </div>

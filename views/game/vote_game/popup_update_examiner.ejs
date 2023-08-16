@@ -1,0 +1,63 @@
+<div id="popup_update_examiner">
+    <div class="container-fluid">
+      <div class="row mt-2" style="justify-content: center !important;">
+        <!-- left column -->
+        <div class="col-md-5" >
+            <!-- general form elements -->
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Tạo Giám Khảo Mới</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-success btn-sm" id="update_examiner_close_btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id="form_update_examiner">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <img id="review_update_avatar_examiner"  src="/template/dist/img/default-150x150.png" alt="" width="150px" height="150px">
+                            <label class="btn btn-success mt-2" style="width: 150px;" id="update_examiner_avatar_upload" for="update_examiner_avatar">
+                                Chọn avatar
+                            </label>
+                            <input accept="image/*" id="update_examiner_avatar" name="update_examiner_avatar" type="file" hidden>
+                        </div>
+                        <div class="form-group">
+                            <input id="id_examiner" name="id_examiner" type="text" hidden>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Tên giám khảo</label>
+                            <input type="text" required class="form-control" id="fullname"
+                                placeholder="Nhập tên giám khảo">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Chức danh</label>
+                            <input type="text" required class="form-control" id="title"
+                                placeholder="Nhập chức danh">
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Username</label>
+                            <input type="text" readonly class="form-control" id="username"
+                                placeholder="Nhập tên đăng nhập">
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Reset Password</label>
+                            <input type="password"  class="form-control" id="re_password"
+                                placeholder="Đặt lại mật khẩu">
+                        </div>
+                       
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" id="submit_form_update_examiner" class="btn btn-success col-sm-4 float-right">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <link rel="stylesheet" href="/template/css/setting_login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <h3 class="form_title">SETTING LOGIN</h3>
+            <form  id="login_form" >
+                <div class="form_group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" required >
+                </div>
+                <div class="form_group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <button id="submit_button" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+    <script src="/template/js/admin_login.js"></script>
+    
+</body>
+</html>
