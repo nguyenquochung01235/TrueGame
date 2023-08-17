@@ -2,7 +2,6 @@ const ws = new WebSocket(`ws://${location.host}/realtime`);
 
 
 function openConnectionToServer() {
-  
   ws.onopen = function (){
     const CLIENT_DATA = {
       chanel: "LIVE",
@@ -22,6 +21,10 @@ function getMessageFromServer(){
     case "VOTE":
       console.log('call vote game');
       updateNumberOfVoteDashBoard();
+      break;
+    case "VOTE_LIST":
+      console.log('call VOTE_LIST game');
+      updateListVoteDashBoard();
       break;
     case "SET_POINT":
       console.log('call point game');
@@ -87,6 +90,7 @@ function getInformationCurrentGame(){
                 if(listExaminer.length == 0){
                   $('.footer').css('opacity', '0');
                 }else{
+                  $('.footer').css('display', 'block')
                   $('.footer').css('opacity', '1');
                 }
                 $('.list_examiner').empty()
@@ -144,7 +148,50 @@ function updateNumberOfVoteDashBoard(){
     })
 }
 
+function updateListVoteDashBoard(){
+  $.ajax({
+    beforeSend: function (xhr) {
+        xhr.setRequestHeader ("Authorization",localStorage.getItem('token'));
+    },
+    type: "GET",
+    url: "vote-game/setting/viewer/vote/list",
+    enctype:"multipart/form-data",
+    cache: false,
+    contentType: false,
+    processData: false,
+    encode: true,
+    success: function (data) {
+      if(data == null){
+        $(".list_vote").css("display", "none")
+        return;
+      }
+      var listVoteData = data.data?.listCandidateTypeList;
+      $('.footer').css('display', 'none');
+      $('.body_list_vote_component').empty();
+      listVoteData.forEach(candidate => {
+        $('.body_list_vote_component').append(`
+        <div class="list_vote_candidate">
+            <div class="list_vote_candidate_header">
+                <img src="/template/image/${candidate.avatar}" alt="" class="examiner_avatar">
+                <p class="list_vote_ratting">${candidate.ratting}</p>
+            </div>
+            <div class="list_vote_candidate_body">
+                <h4 class="list_vote_candidate_fullname">${candidate.fullname}</h4>
+                <p class="list_vote_candidate_title">${candidate.title}</p>
+            </div>
+        </div>
+        `)
+      });
+
+    },
+    error: function(data){
+      $(".list_vote").css("display", "none")
+    }
+  })
+}
+
 openConnectionToServer();
 updateNumberOfVoteDashBoard();
+updateListVoteDashBoard();
 getInformationCurrentGame();
 getMessageFromServer();

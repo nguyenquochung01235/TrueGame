@@ -4,6 +4,8 @@ const path = require('path');
 const sharp = require('sharp');
 const sequelize = require('sequelize')
 
+const PointLadderService = require("./point_ladder.service");
+
 const GameModel = database.game;
 const ExaminerModel = database.examiner;
 const CandidateModel  = database.candidate;
@@ -22,9 +24,12 @@ GameService.getCurrentGame = async function (){
     return result;
 }
 
-GameService.createNewGame = async function (name_game, background){
+GameService.createNewGame = async function (name_game, background,max_vote, arr_point_ladder_title, arr_point_ladder_max_point){
    try {
     if( await this.getCurrentGame() != null){
+        return false;
+    }
+    if(max_vote < 1){
         return false;
     }
     if(background != null){
@@ -37,7 +42,24 @@ GameService.createNewGame = async function (name_game, background){
         link_examiner: '/vote-game/view/examiner',
         link_viewer: '/vote-game/view/viewer',
         active: 0,
+        max_vote: max_vote
     })
+
+    let pointLadderTitleArray = arr_point_ladder_title.split(',');
+    let pointLadderMaxPointArray = arr_point_ladder_max_point.split(',');
+    
+    if(pointLadderTitleArray.length == 0 || pointLadderTitleArray == null){
+        return false;
+    }
+    if(pointLadderMaxPointArray.length == 0 || pointLadderMaxPointArray == null){
+        return false;
+    }
+
+    pointLadderTitleArray.forEach(async (title,index) => {
+        let max_point = pointLadderMaxPointArray[index]
+        await PointLadderService.createPointLadder(title, max_point);
+    });
+
     return result;
    } catch (error) {
     console.log(error)
@@ -45,10 +67,13 @@ GameService.createNewGame = async function (name_game, background){
    }
  }
 
- GameService.updateGame = async function (name_game, background){
+ GameService.updateGame = async function (name_game, background,max_vote, arr_point_ladder_title, arr_point_ladder_max_point){
     try{
         const game = await this.getCurrentGame();
         if( game == null){
+            return false;
+        }
+        if(max_vote < 1){
             return false;
         }
         if(background != null){
@@ -57,10 +82,29 @@ GameService.createNewGame = async function (name_game, background){
         }
         game.set({
             name_game: name_game,
+            max_vote: max_vote,
         })
         await game.save();
+
+        let pointLadderTitleArray = arr_point_ladder_title.split(',');
+        let pointLadderMaxPointArray = arr_point_ladder_max_point.split(',');
+        
+        if(pointLadderTitleArray.length == 0 || pointLadderTitleArray == null){
+            return false;
+        }
+        if(pointLadderMaxPointArray.length == 0 || pointLadderMaxPointArray == null){
+            return false;
+        }
+        await PointLadderService.deletePointLadder();
+
+        pointLadderTitleArray.forEach(async (title,index) => {
+            let max_point = pointLadderMaxPointArray[index]
+            await PointLadderService.createPointLadder(title, max_point);
+        });
+
         return true;
     }catch(err){
+        console.log(err)
         return false;
     }
  }
@@ -166,6 +210,8 @@ GameService.getGameInformation = async function(){
                 attributes: ['id_examiner','fullname', 'title','avatar']
             }]
         })
+
+        const listPointLadder = await PointLadderService.getListPointLadder();
     
         const gameInformation = {
             game: gameData?.dataValues,
@@ -186,8 +232,8 @@ GameService.getGameInformation = async function(){
                 ratting: curentCandidate[0]?.ratting,
                 point: curentCandidate[0]?.points.reduce((total, points) => total + points.point, 0),
             },
-            point_current_candidate: listPointOfCurrentCandidate
-            
+            point_current_candidate: listPointOfCurrentCandidate,
+            point_ladder: listPointLadder,
         }
         return gameInformation;
     } catch (error) {

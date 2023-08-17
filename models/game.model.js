@@ -23,6 +23,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
 
         },
+        max_vote:{
+            type: Sequelize.INTEGER
+
+        },
         created_at:{
             type: Sequelize.DATE
         },

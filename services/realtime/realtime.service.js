@@ -2,11 +2,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken')
 const WebSocket = require('ws');
 const {uuid}  = require('uuidv4');
-// const express = require("express");
-// const app = express();
-// const server = app.listen(3001, function () {
-//     console.log("ws working on 3001")
-// });
+
 
 const WebSocketService = {}
 
@@ -39,7 +35,6 @@ WebSocketService.initialize = function(server){
                             function: "NUMBER_VIEWER",
                             viewer: ViewerListConnection.length
                         }))
-                        console.log("=================Live Connect==============")
                         break;
 
                     case "VIEWER":
@@ -120,6 +115,19 @@ WebSocketService.initialize = function(server){
                                 function: "VOTE"
                             }))
                         });
+
+                        LiveListConnection.forEach(live => {
+                            live.ws.send(JSON.stringify({
+                                function: "VOTE_LIST"
+                            }))
+                        });
+
+                        GameMasterListConnection.forEach(gameMaster => {
+                            gameMaster.ws.send(JSON.stringify({
+                                function: "VOTE_LIST"
+                            }))
+                        });
+                        
                         break;
                     
                     case "EXAMINER":

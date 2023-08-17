@@ -26,6 +26,7 @@ database.game = require("./game.model.js")(sequelize, Sequelize);
 database.candidate = require("./candidate.model.js")(sequelize, Sequelize);
 database.examiner = require("./examiner.model.js")(sequelize, Sequelize);
 database.point = require("./point.model.js")(sequelize, Sequelize);
+database.point_ladder = require("./point_ladder.model.js")(sequelize, Sequelize);
 
 // define relationship
 database.game.hasMany(database.candidate, {foreignKey: 'id_game'});
@@ -34,6 +35,7 @@ database.candidate.hasMany(database.point, {foreignKey: 'id_candidate'});
 database.examiner.hasMany(database.point, {foreignKey: 'id_examiner'});
 database.point.belongsTo(database.candidate, {foreignKey: 'id_candidate'});
 database.point.belongsTo(database.examiner, {foreignKey: 'id_examiner'});
-
+database.game.hasMany(database.point_ladder, {foreignKey: 'id_game'});
+database.point_ladder.belongsTo(database.game, {foreignKey: 'id_game'});
 
 module.exports = database;

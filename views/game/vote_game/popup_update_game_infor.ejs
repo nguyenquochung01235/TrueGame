@@ -16,7 +16,7 @@
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form id="form_update_game">
-                    <div class="card-body">
+                    <div class="card-body" style=" height: 70vh; overflow-y: scroll;">
                         <div class="form-group">
                             <label for="name_game">Tên cuộc thi </label>
                             <input type="text" required class="form-control" id="name_game"
@@ -29,6 +29,31 @@
                             </label>
                             <input accept="image/*" id="input_background" name="input_background" type="file" hidden>
                         </div>
+                        <div class="form-group">
+                            <label for="max_vote">Số lượt bình chọn: </label>
+                            <input type="number" required class="form-control" id="max_vote"
+                                placeholder="Tổng số thí sinh được bình chọn trong một lượt vote"  min="1" value="<%- gameData.game.max_vote %>">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="name_game" >Tiêu chí chấm điểm</label>
+                        </div>
+                        <% gameData.point_ladder.forEach((point_ladder,index)=> { %>
+                            <div class="form-group row" style="margin-left: 0;">
+                                <input type="text" required class="col form-control point_ladder_title"
+                                placeholder="Nhập tiêu chí"
+                                value="<%- point_ladder.title %>"
+                                >
+                                <input type="number" step="0.5" min="0" required class="col-3 form-control point_ladder_max_point"
+                                placeholder="Nhập điểm"
+                                style="margin-left: 10px;"
+                                value="<%- point_ladder.max_point %>"
+                                >
+                                <button type="button" class="btn btn-danger remove_point_ladder_button" style="margin-left: 10px;">X</button>
+                            </div>
+                        <% }) %>
+
+                        <button type="button" id="add_more_point_ladder_button" class="btn btn-warning col-6">Thêm tiêu chí</button>
                     </div>
                     <!-- /.card-body -->
 

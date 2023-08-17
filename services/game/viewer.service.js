@@ -52,7 +52,8 @@ ViewerService.voteForCurrentCandidateByViewer = async function(){
         const curentCandidate = await CandidateModel.findOne({
             where:{
                 id_game: (gameData?.id_game || 0),
-                active: 1
+                active: 1,
+                type: 'SINGLE'
             },
         })
     
@@ -69,6 +70,39 @@ ViewerService.voteForCurrentCandidateByViewer = async function(){
 
 }
 
+ViewerService.voteForListCurrentCandidateByViewer = async function(list_candidate){
+    try {
+        const list_data = list_candidate.split(',')
+        if(list_data == [] ||list_data == null ) return false;
+        const gameData = await GameModel.findOne({
+            where : {
+                active: {
+                    [Op.or]: [0,1]
+                }
+            },
+        })
+        
+        if(gameData == null) return false;
+        if(list_data.length > gameData.max_vote){
+            return false
+        }
+        
+        list_data.forEach(id_candidate => {
+            CandidateModel.increment('ratting', {
+                by: 1,
+                where: {
+                    id_candidate: id_candidate,
+                    type: 'LIST'
+                }
+            })
+        });
+        
+        return true;
+    } catch (error) {
+        return false
+    }
+
+}
 
 
 module.exports = ViewerService;

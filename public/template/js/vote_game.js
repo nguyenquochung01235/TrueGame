@@ -36,13 +36,61 @@ function setBackgroundGameView() {
   $("#input_background").on("change",getImagebackGround )
 }
 
+function addMorePointLadder(){
+  $("#add_more_point_ladder_button").on('click', function(){
+    var point_ladder_row = $(`<div class="form-group row" style="margin-left: 0;">
+                  <input type="text" required class="col form-control point_ladder_title"
+                  placeholder="Nhập tiêu chí">
+                  <input type="number" step="0.5" min="0" required class="col-3 form-control point_ladder_max_point"
+                  placeholder="Nhập điểm"
+                  style="margin-left: 10px;"
+                  >
+                  <button type="button" class="btn btn-danger remove_point_ladder_button" style="margin-left: 10px;">X</button>
+              </div>`);
+    if($("#form_point_ladder").length == 1){
+      $("#form_point_ladder").append(point_ladder_row);
+    }else{
+      // $("#form_update_game > .card-body").append(point_ladder_row).insertBefore("#add_more_point_ladder_button");
+      (point_ladder_row).insertBefore("#add_more_point_ladder_button");
+    }
+    
+  });
+}
+
+function removePointLadder(){
+  $(document).on('click', ".remove_point_ladder_button", function() {
+      $(this.parentElement).remove()
+});
+
+}
+
+
 function createNewGame(){
   $("#form_create_game").on("submit",function (event) {
     event.preventDefault();
     const formDataCreateNewGame = new FormData();
     formDataCreateNewGame.append("name_game", $("#name_game").val());
     formDataCreateNewGame.append("background", $("#input_background")[0].files[0]);
-  
+    formDataCreateNewGame.append("max_vote", $("#max_vote").val());
+    let arrayPointLadderTitle = []
+    let arrayPointLadderMaxPoint = []
+
+    $('.point_ladder_title').each(function(){
+      arrayPointLadderTitle.push(this.value);
+    });
+
+    $('.point_ladder_max_point').each(function(){
+      arrayPointLadderMaxPoint.push(this.value);
+    });
+
+    if(arrayPointLadderTitle.length != arrayPointLadderMaxPoint.length){
+      alert("Lỗi tiêu chí");
+      location.reload();
+    }
+
+    formDataCreateNewGame.append("point_ladder_title",arrayPointLadderTitle);
+    formDataCreateNewGame.append("point_ladder_max_point",arrayPointLadderMaxPoint);
+
     $.ajax({
       beforeSend: function (xhr) {
           xhr.setRequestHeader ("Authorization",localStorage.getItem('token'));
@@ -94,6 +142,27 @@ function updateGame() {
     const formDataUpdateGame = new FormData();
     formDataUpdateGame.append("name_game", $("#name_game").val());
     formDataUpdateGame.append("background", $("#input_background")[0].files[0]);
+    formDataUpdateGame.append("max_vote", $("#max_vote").val());
+
+    let arrayPointLadderTitle = []
+    let arrayPointLadderMaxPoint = []
+
+    $('.point_ladder_title').each(function(){
+      arrayPointLadderTitle.push(this.value);
+    });
+
+    $('.point_ladder_max_point').each(function(){
+      arrayPointLadderMaxPoint.push(this.value);
+    });
+
+    if(arrayPointLadderTitle.length != arrayPointLadderMaxPoint.length){
+      alert("Lỗi tiêu chí");
+      location.reload();
+    }
+
+    formDataUpdateGame.append("point_ladder_title",arrayPointLadderTitle);
+    formDataUpdateGame.append("point_ladder_max_point",arrayPointLadderMaxPoint);
+
   
     $.ajax({
       beforeSend: function (xhr) {
@@ -806,6 +875,7 @@ function getMessageFromServer(){
      case "VOTE":
        updateNumberOfVoteDashBoard()
        break;
+
      case "NUMBER_VIEWER":
         var number_viewer = JSON.parse(data?.viewer) || 0;
         $("#number_viewer").text(number_viewer)
@@ -824,6 +894,8 @@ getGameMasterInformation();
 updateNumberOfVoteDashBoard();
 
 setBackgroundGameView();
+addMorePointLadder();
+removePointLadder();
 createNewGame();
 togleUpdateGameScreen();
 updateGame();

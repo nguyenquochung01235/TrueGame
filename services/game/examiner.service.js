@@ -116,9 +116,9 @@ ExaminerService.setPoint = async function(id_candidate,examiner_username,point){
         if(examiner == null){
             return false
         }
-        if(point >10){
-            return false;
-        }
+        // if(point >10){
+        //     return false;
+        // }
         await PointModel.create({
             id_candidate: id_candidate,
             id_examiner: examiner.id_examiner,

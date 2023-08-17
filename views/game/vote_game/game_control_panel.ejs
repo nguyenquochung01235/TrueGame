@@ -186,8 +186,78 @@
                                         <!-- /.card-header -->
                                         <!-- form start -->
                                         <div id="game_box">
-                                            <div class="card-body" id="game_box_body" style="height: 500px;">
+                                            <div class="card-body row" id="game_box_body" style="height: 500px;">
+                                                <div class="col-md-6">
+                                                    <div class="card card-success">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title font-weight-bold">
+                                                              Link Web View
+                                                            </h3>
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-success btn-sm"
+                                                                    data-card-widget="collapse" title="Collapse">
+                                                                    <i class="fas fa-minus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <button class="btn btn-success col mt-2 p-2">
+                                                                <a href="/vote-game" target="_blank" style="color: white;">
+                                                                    Vote Home Page
+                                                                </a>
+                                                                
+                                                            </button> 
+                                                            <button class="btn btn-success col mt-2 p-2">
+                                                                <a href="/vote-game/examiner" target="_blank" style="color: white;">
+                                                                    Vote Examiner Page
+                                                                </a>
+                                                            </button>
+                                                            <button class="btn btn-success col mt-2 p-2">
+                                                                <a href="/vote-game/viewer" target="_blank"  style="color: white;">
+                                                                    Vote Viewer Page
+                                                                </a>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card card-success">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title font-weight-bold">
+                                                              Danh sách tiêu chí chấm điểm
+                                                            </h3>
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-success btn-sm"
+                                                                    data-card-widget="collapse" title="Collapse">
+                                                                    <i class="fas fa-minus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body card-overflow" style="max-height: 42vh;">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 10px">STT</th>
+                                                                        <th>Tiêu chí</th>
+                                                                        <th>Điểm</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <% gameData.point_ladder.forEach((point_ladder,index)=> { %>
+                                                                        <tr>
+                                                                            <td><%-index+1%></td>
+                                                                            <td><%-point_ladder.title%></td>
+                                                                            <td><%-point_ladder.max_point%></td>
+                                                                        </tr>
+                                                                    <% }) %>
+                                                                </tbody>
+                                                            </table>
 
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
@@ -320,78 +390,80 @@
                                 </div>
 
                             </div>
-
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header bg-success flex">
-                                            <h3 class="card-title font-weight-bold">Danh Sách Bình Chọn</h3>
-                                            <div class="card-tools">
-
-                                                <button type="button" class="btn btn-success btn-sm"
-                                                    data-card-widget="collapse" title="Collapse">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <div class="card-body card-overflow">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 10px">STT</th>
-                                                        <th style="width: 80px; text-align: center;">Avatar</th>
-                                                        <th>Tên thí sinh</th>
-                                                        <th>Tên phần thi</th>
-                                                        <th style="width: 20px">Vote</th>
-                                                        <th style="width: 170px">Cập nhật</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                  <% gameData.candidateList.forEach((candidate,index)=> { %>                                                 
-                                                        <tr>
-                                                            <td><%-index+1%></td>
-                                                            <td><img class="table_avatar"
-                                                                    src="/template/image/<%-candidate.avatar %>" alt="" srcset="">
-                                                            </td>
-                                                            <td>
-                                                                <p><%-candidate.fullname %></p>
-                                                            </td>
-                                                            <td>
-                                                                <p><%-candidate.title %></p>
-                                                            </td>
+                            <% if (gameData?.candidateList[0]?.active != null) { %>
+                                <div class="row mb-2">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header bg-success flex">
+                                                <h3 class="card-title font-weight-bold">Danh Sách Bình Chọn</h3>
+                                                <div class="card-tools">
     
-                                                           
-                                                            <td><span class="badge bg-primary"><%-candidate.ratting%></span></td>
-                                                            <td>
-                                                                
-                                                                <button type="submit" data-user="<%-candidate.id_candidate%>" class="btn btn-warning update-candidate">Cập nhật</button>
-                                                                <button type="submit" data-user="<%-candidate.id_candidate%>" class="btn btn-danger delete-candidate">Xoá</button>
-                                                            </td>
-                                                            
+                                                    <button type="button" class="btn btn-success btn-sm"
+                                                        data-card-widget="collapse" title="Collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body card-overflow">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 10px">STT</th>
+                                                            <th style="width: 80px; text-align: center;">Avatar</th>
+                                                            <th>Tên thí sinh</th>
+                                                            <th>Tên phần thi</th>
+                                                            <th style="width: 20px">Vote</th>
+                                                            <th style="width: 170px">Cập nhật</th>
                                                         </tr>
-                                                  <% }) %>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer clearfix">
-                                            <% if (gameData.candidateList[0].active == 0) { %>
-                                                <button type="submit" class="btn btn-success col-sm-3 float-right" id="start_vote_list">Bắt Đầu Bình Chọn</button>
-
-                                            <% } %>
-                                            <% if (gameData.candidateList[0].active == 1) { %>
-                                                <button type="submit" class="btn btn-danger col-sm-3 float-right" id="stop_vote_list">Kết Thúc Bình Chọn</button>
-
-                                            <% } %>
-                                            <% if (gameData.candidateList[0].active == 2) { %>
-                                                <button type="submit" disabled class="btn btn-danger col-sm-3 float-right">Đã Kết Thúc Bình Chọn</button>
-
-                                            <% } %>
+                                                    </thead>
+                                                    <tbody>
+                                                      <% gameData.candidateList.forEach((candidate,index)=> { %>                                                 
+                                                            <tr>
+                                                                <td><%-index+1%></td>
+                                                                <td><img class="table_avatar"
+                                                                        src="/template/image/<%-candidate.avatar %>" alt="" srcset="">
+                                                                </td>
+                                                                <td>
+                                                                    <p><%-candidate.fullname %></p>
+                                                                </td>
+                                                                <td>
+                                                                    <p><%-candidate.title %></p>
+                                                                </td>
+        
+                                                               
+                                                                <td><span class="badge bg-primary"><%-candidate.ratting%></span></td>
+                                                                <td>
+                                                                    
+                                                                    <button type="submit" data-user="<%-candidate.id_candidate%>" class="btn btn-warning update-candidate">Cập nhật</button>
+                                                                    <button type="submit" data-user="<%-candidate.id_candidate%>" class="btn btn-danger delete-candidate">Xoá</button>
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                      <% }) %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                            <div class="card-footer clearfix">
+                                                <% if (gameData?.candidateList[0]?.active == 0) { %>
+                                                    <button type="submit" class="btn btn-success col-sm-3 float-right" id="start_vote_list">Bắt Đầu Bình Chọn</button>
+    
+                                                <% } %>
+                                                <% if (gameData?.candidateList[0]?.active == 1) { %>
+                                                    <button type="submit" class="btn btn-danger col-sm-3 float-right" id="stop_vote_list">Kết Thúc Bình Chọn</button>
+    
+                                                <% } %>
+                                                <% if (gameData?.candidateList[0]?.active == 2) { %>
+                                                    <button type="submit" disabled class="btn btn-danger col-sm-3 float-right">Đã Kết Thúc Bình Chọn</button>
+    
+                                                <% } %>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <% } %>
+                            
 
                             <div class="row mb-2">
                                 <div class="col-md-12">
@@ -552,41 +624,80 @@
 
                         <% } else {%>
                           <!-- New Game Box -->
-                          <div class="row mt-2">
-                            <!-- left column -->
-                            <div class="col-md-6">
-                                <!-- general form elements -->
-                                <div class="card card-success">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Tạo Cuộc Thi Mới</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <!-- form start -->
-                                    <form id="form_create_game">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="name_game">Tên cuộc thi </label>
-                                                <input type="text" required class="form-control" id="name_game"
-                                                    placeholder="Nhập tên cuộc thi">
-                                            </div>
-                                            <div class="form-group">
-                                                <label id="upload_label" for="input_background">
-                                                    <img src="/template/image/img_upload_icon.png" alt="">
-                                                    Chọn ảnh Background
-                                                </label>
-                                                <input accept="image/*" id="input_background" name="input_background" type="file" hidden>
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
-
-                                        <div class="card-footer">
-                                            <button type="submit" id="submit_form_create_game" class="btn btn-success col-sm-3 float-right">Tạo Cuộc Thi</button>
-                                        </div>
-                                    </form>
+                          <form id="form_create_game">
+                            <div class="card card-primary row ">
+                                <div class="card-header">
+                                    <h3 class="card-title">Tạo Cuộc Thi Mới</h3>
                                 </div>
-                                <!-- /.card -->
+                                <div class="card-body row">
+                                    <div class="col-md-6">
+                                        <!-- general form elements -->
+                                        <div class="card card-success">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Thông Tin Cuộc Thi</h3>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <!-- form start -->
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="name_game">Tên cuộc thi </label>
+                                                        <input type="text" required class="form-control" id="name_game"
+                                                            placeholder="Nhập tên cuộc thi">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label id="upload_label" for="input_background">
+                                                            <img src="/template/image/img_upload_icon.png" alt="">
+                                                            Chọn ảnh Background
+                                                        </label>
+                                                        <input accept="image/*" id="input_background" name="input_background" type="file" hidden>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="max_vote">Số lượt bình chọn: </label>
+                                                        <input type="number" required class="form-control" id="max_vote"
+                                                            placeholder="Tổng số thí sinh được bình chọn trong một lượt vote"  min="1" >
+                                                    </div>
+                                                </div>
+                                                <!-- /.card-body -->
+        
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+        
+                                    <div class="col-md-6">
+                                        <!-- general form elements -->
+                                        <div class="card card-warning">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Tiêu Chí Chấm Điểm</h3>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <!-- form start -->
+                                                <div class="card-body" id="form_point_ladder">
+                                                    <label for="name_game" >Tiêu chí chấm điểm</label>
+                                                    <div class="form-group row" style="margin-left: 0;">
+                                                        <input type="text" required class="col form-control point_ladder_title"
+                                                        placeholder="Nhập tiêu chí" >
+                                                        <input type="number" step="0.5" min="0" required class="col-3 form-control point_ladder_max_point"
+                                                        placeholder="Nhập điểm"
+                                                        style="margin-left: 10px;"
+                                                        >
+                                                        <button type="button" class="btn btn-danger remove_point_ladder_button" style="margin-left: 10px;">X</button>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="card-footer">
+                                                    <button type="button" id="add_more_point_ladder_button" class="btn btn-warning col-6">Thêm tiêu chí</button>
+                                                </div>
+                                                <!-- /.card-body -->
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" id="submit_form_create_game" class="btn btn-success col-sm-3 float-right">Tạo Cuộc Thi</button>
+                                </div>
                             </div>
-                          </div>
+                          </form>
+                           
                           <!-- End New Game Box -->  
                         <% } %>
                     </div>

@@ -54,7 +54,7 @@ CandidateService.createCandidate = async function(fullname, title, avatar, type)
             return false; 
         }
 
-        var isListVoting = CandidateModel.findOne({
+        var isListVoting = await CandidateModel.findOne({
             where:{
                 id_game: game.id_game,
                 type: "LIST",
@@ -225,6 +225,29 @@ CandidateService.finishCandidate = async function(id_candidate) {
 
 }
 
+CandidateService.getListCandidateTypeListForVote = async function(){
+    try {
+        const game = await GameService.getCurrentGame();
+        if( game == null || game.active != 1){
+            return false;
+        }
+        const listCandidateTypeList = await CandidateModel.findAll({
+            where:{
+                id_game: game.id_game,
+                type: 'LIST',
+                active: 1,
+            },
+            attributes: ['id_candidate', 'fullname', 'title', 'avatar', 'active', 'ratting'],
+        })
+        return {
+            listCandidateTypeList: listCandidateTypeList,
+            max_vote: game.max_vote
+        }
+       } catch (error) {
+        return false;
+       }
+}
+
 CandidateService.startListCandidate = async function() {
     try {
         const game = await GameService.getCurrentGame();
@@ -261,6 +284,7 @@ CandidateService.startListCandidate = async function() {
 
 
 }
+
 CandidateService.stopListCandidate = async function() {
     try {
         const game = await GameService.getCurrentGame();
@@ -298,6 +322,29 @@ CandidateService.stopListCandidate = async function() {
 
 }
 
-
+CandidateService.getListCandidateTypeListOrderByRattingDESC = async function(){
+    try {
+        const game = await GameService.getCurrentGame();
+        if( game == null || game.active != 1){
+            return false;
+        }
+        const listCandidateTypeList = await CandidateModel.findAll({
+            where:{
+                id_game: game.id_game,
+                type: 'LIST',
+                active: {
+                    [Op.or]: [1,2]
+                },
+            },
+            attributes: ['id_candidate', 'fullname', 'title', 'avatar', 'active', 'ratting'],
+            order: [
+                ['ratting', 'DESC'],
+            ],
+        })
+        return {listCandidateTypeList: listCandidateTypeList}
+       } catch (error) {
+        return false;
+       }
+}
 
 module.exports = CandidateService;

@@ -297,6 +297,8 @@ body{
     /* color: white; */
 }
 
+
+
 .examiner_bottom{
     padding: 20px 5px;
     background-color: #f7ad19;
@@ -306,6 +308,69 @@ body{
     margin-bottom: 5px;
 }
 
+.list_vote{
+    margin: 20px;
+}
+
+.header_list_vote_component > h3 {
+    text-transform: uppercase;
+    text-decoration: underline;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.list_vote_candidate{
+   margin-top: 10px;
+   margin-right: 10px;
+   border: 3px solid #f7ad19;
+   border-radius: 5px;
+   width: 180px;
+   height: 100%;
+   background-color: #f7ad19;
+}
+
+.list_vote_candidate_header{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    background-color: #f7ad19;
+    border-bottom: 1px solid white;
+    padding: 5px;
+}
+
+.list_vote_ratting{
+    font-size: 30px;
+    font-weight: 800;
+    background-color: #f7ad19;
+    padding: 10px 0px;
+    border-radius: 5px;
+    width: 80px;
+    text-align: center;
+    /* color: white; */
+}
+
+.body_list_vote_component{
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    /* justify-content: center; */
+    align-items: center;
+    /* padding: 10px; */
+    height: 190px;
+}
+
+.list_vote_candidate_body{
+    padding: 20px 5px;
+    background-color: #f7ad19;
+}
+
+.list_vote_candidate_fullname{
+    margin-bottom: 5px;
+}
+
+.list_vote_candidate_title{
+    margin-top: 20px;
+}
 
 @keyframes fade-out {
     from {

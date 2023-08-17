@@ -5,9 +5,15 @@
     margin: 0;
     font-family: 'Poppins', sans-serif;
     color: #053f5c;
-
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
+
+body{
+    overflow: hidden;
+}
 
 .loading{
     position: absolute;
@@ -36,6 +42,8 @@
 .container{
     height: 100vh;
     background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -187,6 +195,78 @@
     display: none ;
 }
 
+
+.content_vote_list{
+    height: 85%;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    /* width: 100%; */
+}
+.list_vote_candidate{
+    margin: 20px;
+    width: 90%;
+    height: 75vh;
+    background-color: #053f5c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 2px solid #f7ad19; */
+    border-radius: 8px;
+}
+
+.header_list_vote_candidate{
+    padding: 10px;
+    text-transform: uppercase;
+    background-color: #f7ad19;
+    width: 100%;
+    text-align: center;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+
+}
+
+.body_list_vote_candidate{
+    overflow-y: scroll;
+}
+
+.item_list_vote_candidate{
+    background-color: white;
+    display: flex;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    justify-content: space-between;
+}
+
+.infor_component_list_vote_candidate{
+    display: flex;
+    align-items: center;
+}
+
+.avatar_list_vote_candidate{
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    border-radius: 100px;
+    border: 2px solid #053f5c;
+}
+
+.checkbox_list_vote_candidate{
+   width: 20px;
+   margin-left: 10px;
+}
+
+#vote_list{
+    font-size: 20px;
+    background-color: #f7ad19;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 10px 10px;
+    width: 90%;
+    border: none;
+    border-radius: 5px;
+}
 
 
 

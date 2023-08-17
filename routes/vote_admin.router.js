@@ -151,7 +151,13 @@ router.get('/setting/game/information',admin_auth,async (req, res, next)=>{
 })
 
 router.post('/setting/game/create',upload.single('background'), admin_auth ,async (req, res, next)=>{
-   const gameData = await GameService.createNewGame(req.body.name_game,req?.file?.buffer || null)
+   const gameData = await GameService.createNewGame(
+    req.body.name_game,
+    req?.file?.buffer || null, 
+    req.body.max_vote,
+    req.body.point_ladder_title,
+    req.body.point_ladder_max_point
+    )
 
    if(gameData != false){
     res.status(201).send(({
@@ -169,7 +175,12 @@ router.post('/setting/game/create',upload.single('background'), admin_auth ,asyn
 });
 
 router.post('/setting/game/update',upload.single('background'), admin_auth ,async (req, res, next)=>{
-   const gameData = await GameService.updateGame(req.body.name_game,req?.file?.buffer || null)
+   const gameData = await GameService.updateGame(
+    req.body.name_game,
+    req?.file?.buffer || null,
+    req.body.max_vote, 
+    req.body.point_ladder_title,
+    req.body.point_ladder_max_point)
 
    if(gameData != false){
     res.status(201).send(({
@@ -349,7 +360,6 @@ router.post('/setting/candidate/finish',upload.none(), admin_auth ,async (req, r
     }
  });
 
-
 router.post('/setting/candidate/list/start',upload.none(), admin_auth ,async (req, res, next)=>{
    
     const result = await CandidateService.startListCandidate()
@@ -480,17 +490,38 @@ router.get('/setting/viewer/vote',upload.none() ,async (req, res, next)=>{
     if(result != false){
      res.status(201).send(({
          success: true,
-         message: "Get vote success full",
+         message: "Get vote successfull",
          link:"/vote-game/setting",
          data: result
      }))
     }else{
      res.status(400).send(({
          success: false,
-         message: "Xoá giám khảo không thành công",
+         message: "Get vote fail",
          link:"/vote-game/setting",
          data: null
      }))
     }
- });
+});
+
+router.get('/setting/viewer/vote/list',upload.none() ,async (req, res, next)=>{
+   
+    const result = await CandidateService.getListCandidateTypeListOrderByRattingDESC()
+ 
+    if(result != false){
+     res.status(201).send(({
+         success: true,
+         message: "Get vote list successfull",
+         link:"/vote-game/setting",
+         data: result
+     }))
+    }else{
+     res.status(400).send(({
+         success: false,
+         message: "Get vote list fail",
+         link:"/vote-game/setting",
+         data: null
+     }))
+    }
+});
 module.exports = router;
