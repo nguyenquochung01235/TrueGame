@@ -84,12 +84,20 @@ function createNewGame(){
     });
 
     if(arrayPointLadderTitle.length != arrayPointLadderMaxPoint.length){
-      alert("Lỗi tiêu chí");
-      location.reload();
+          alert("Lỗi tiêu chí");
+          location.reload();
     }
 
-    formDataCreateNewGame.append("point_ladder_title",arrayPointLadderTitle);
-    formDataCreateNewGame.append("point_ladder_max_point",arrayPointLadderMaxPoint);
+    let arrayObjectPointLadder = [];
+
+    arrayPointLadderTitle.forEach((point_title, index)=>{
+      arrayObjectPointLadder.push({
+        title: point_title,
+        max_point: arrayPointLadderMaxPoint[index]
+      });
+    })
+    
+    formDataCreateNewGame.append("point_ladder", JSON.stringify(arrayObjectPointLadder));
 
     $.ajax({
       beforeSend: function (xhr) {
@@ -156,13 +164,20 @@ function updateGame() {
     });
 
     if(arrayPointLadderTitle.length != arrayPointLadderMaxPoint.length){
-      alert("Lỗi tiêu chí");
-      location.reload();
+          alert("Lỗi tiêu chí");
+          location.reload();
     }
 
-    formDataUpdateGame.append("point_ladder_title",arrayPointLadderTitle);
-    formDataUpdateGame.append("point_ladder_max_point",arrayPointLadderMaxPoint);
+    let arrayObjectPointLadder = [];
 
+    arrayPointLadderTitle.forEach((point_title, index)=>{
+      arrayObjectPointLadder.push({
+        title: point_title,
+        max_point: arrayPointLadderMaxPoint[index]
+      });
+    })
+    
+    formDataUpdateGame.append("point_ladder", JSON.stringify(arrayObjectPointLadder));
   
     $.ajax({
       beforeSend: function (xhr) {

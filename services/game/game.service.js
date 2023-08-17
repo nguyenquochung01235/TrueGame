@@ -24,7 +24,7 @@ GameService.getCurrentGame = async function (){
     return result;
 }
 
-GameService.createNewGame = async function (name_game, background,max_vote, arr_point_ladder_title, arr_point_ladder_max_point){
+GameService.createNewGame = async function (name_game, background,max_vote, arr_point_ladder){
    try {
     if( await this.getCurrentGame() != null){
         return false;
@@ -45,19 +45,14 @@ GameService.createNewGame = async function (name_game, background,max_vote, arr_
         max_vote: max_vote
     })
 
-    let pointLadderTitleArray = arr_point_ladder_title.split(',');
-    let pointLadderMaxPointArray = arr_point_ladder_max_point.split(',');
-    
-    if(pointLadderTitleArray.length == 0 || pointLadderTitleArray == null){
+    const arrPointLadder = JSON.parse(arr_point_ladder)
+        
+    if(arrPointLadder.length == 0 || arrPointLadder == null){
         return false;
     }
-    if(pointLadderMaxPointArray.length == 0 || pointLadderMaxPointArray == null){
-        return false;
-    }
-
-    pointLadderTitleArray.forEach(async (title,index) => {
-        let max_point = pointLadderMaxPointArray[index]
-        await PointLadderService.createPointLadder(title, max_point);
+   
+    arrPointLadder.forEach(async (point_ladder) => {
+        await PointLadderService.createPointLadder(point_ladder.title, point_ladder.max_point);
     });
 
     return result;
@@ -67,7 +62,7 @@ GameService.createNewGame = async function (name_game, background,max_vote, arr_
    }
  }
 
- GameService.updateGame = async function (name_game, background,max_vote, arr_point_ladder_title, arr_point_ladder_max_point){
+ GameService.updateGame = async function (name_game, background,max_vote, arr_point_ladder){
     try{
         const game = await this.getCurrentGame();
         if( game == null){
@@ -86,20 +81,16 @@ GameService.createNewGame = async function (name_game, background,max_vote, arr_
         })
         await game.save();
 
-        let pointLadderTitleArray = arr_point_ladder_title.split(',');
-        let pointLadderMaxPointArray = arr_point_ladder_max_point.split(',');
+        const arrPointLadder = JSON.parse(arr_point_ladder)
         
-        if(pointLadderTitleArray.length == 0 || pointLadderTitleArray == null){
+        if(arrPointLadder.length == 0 || arrPointLadder == null){
             return false;
         }
-        if(pointLadderMaxPointArray.length == 0 || pointLadderMaxPointArray == null){
-            return false;
-        }
+       
         await PointLadderService.deletePointLadder();
 
-        pointLadderTitleArray.forEach(async (title,index) => {
-            let max_point = pointLadderMaxPointArray[index]
-            await PointLadderService.createPointLadder(title, max_point);
+        arrPointLadder.forEach(async (point_ladder) => {
+            await PointLadderService.createPointLadder(point_ladder.title, point_ladder.max_point);
         });
 
         return true;

@@ -155,8 +155,7 @@ router.post('/setting/game/create',upload.single('background'), admin_auth ,asyn
     req.body.name_game,
     req?.file?.buffer || null, 
     req.body.max_vote,
-    req.body.point_ladder_title,
-    req.body.point_ladder_max_point
+    req.body.point_ladder
     )
 
    if(gameData != false){
@@ -179,8 +178,7 @@ router.post('/setting/game/update',upload.single('background'), admin_auth ,asyn
     req.body.name_game,
     req?.file?.buffer || null,
     req.body.max_vote, 
-    req.body.point_ladder_title,
-    req.body.point_ladder_max_point)
+    req.body.point_ladder)
 
    if(gameData != false){
     res.status(201).send(({
