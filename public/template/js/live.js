@@ -1,5 +1,5 @@
-const ws = new WebSocket(`ws://${location.host}/realtime`);
-
+const protocol = window.location.protocol.includes('https') ? 'wss': 'ws'
+const ws = new WebSocket(`${protocol}://${location.host}/realtime`);
 
 function openConnectionToServer() {
   ws.onopen = function (){
