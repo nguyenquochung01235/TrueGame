@@ -7,6 +7,28 @@ const PointLadderModel = database.point_ladder;
 
 const PointLadderService = {};
 
+PointLadderService.getMaxPointOfCurrentGame = async function() {
+    try{
+        const gameData = await GameModel.findOne({
+            where : {
+                active: {
+                    [Op.or]: [0,1]
+                }
+            },
+        })
+    
+    return await PointLadderModel.findOne({
+        where:{
+            id_game: gameData.id_game
+        },
+        attributes: [[sequelize.fn('sum', sequelize.col('max_point')), 'total_max_point']],
+    })
+
+    }catch(error){
+        return false
+    }
+}
+
 PointLadderService.getListPointLadder = async function(){
     try{
         const gameData = await GameModel.findOne({
@@ -28,7 +50,7 @@ PointLadderService.getListPointLadder = async function(){
     }
 }
 
-PointLadderService.createPointLadder = async function(point_ladder_title, point_ladder_max_point){
+PointLadderService.createPointLadder = async function(arrPointLadder){
     try {
         const gameData = await GameModel.findOne({
             where : {
@@ -39,12 +61,14 @@ PointLadderService.createPointLadder = async function(point_ladder_title, point_
         })
     
         if(gameData == null) return false;
-    
-        await PointLadderModel.create({
-            title: point_ladder_title,
-            max_point: point_ladder_max_point,
-            id_game: gameData.id_game
-        })
+        arrPointLadder.forEach((point_ladder) => {
+              PointLadderModel.create({
+                title: point_ladder.title,
+                max_point: point_ladder.max_point,
+                id_game: gameData.id_game
+            })
+        });
+       return true;
     } catch (error) {
         console.log(error)
     }

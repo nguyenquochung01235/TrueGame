@@ -76,6 +76,35 @@ function getExaminerInformation(){
         openConnectionToServer()
       )
 }
+function getPointLadderInformation(){
+    $.ajax({
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization",localStorage.getItem('token'));
+        },
+        type: "GET",
+        url: "examiner/game/point/ladder",
+        contentType: false,
+        processData: false,
+        encode: true,
+        success: function (data) {
+          $("#max_point").text(`Điểm Tối Đa: ${data.game_data.total_max_point.total_max_point}`)
+          $('.form_body_point_ladder').empty();
+          
+          data.game_data.point_lader.forEach((point_ladder) => {
+            $('.form_body_point_ladder').append(`
+              <div class="point_ladder_component">
+                <p>${point_ladder.title}<br><small>(Tối đa: ${point_ladder.max_point})</small></p>
+                <input required class="input_point_ladder" type="number" step="0.5" min="0" max="${point_ladder.max_point}" placeholder="0">
+              </div>
+            `);
+          });
+        },
+        error: function(data){
+          alert(data.responseJSON.message);
+          window.location.href = data.responseJSON.link
+        }
+      })
+}
 
 function getInformationCurrentGame(){
     $.ajax({
@@ -92,7 +121,7 @@ function getInformationCurrentGame(){
           if(data.game_data.candidate != null){
             $("#have_current_candidate").css("display", 'flex')
             $("#not_have_current_candidate").css("display", 'none')
-            $(".examiner_point").css("display", 'flex')
+            $(".examiner_point").css("display", 'block')
 
             $('#candidate_avatar > img').attr("src", `/template/image/${data.game_data.candidate.avatar}`)
             $('#candidate_infor > h3').text(data.game_data.candidate.fullname)
@@ -133,22 +162,39 @@ function getInformationCurrentGame(){
 
 }
 
+function setTotalPoint(){
+  $(document).on('change', ".input_point_ladder", function() {
+    let total_point = 0;
+      $(".input_point_ladder").each(()=>{
+        if($(this).val()*1> $(this).attr('max')*1){
+          $(this).val($(this).attr('max')* 1 )
+        }
+        if($(this).val() * 1 < $(this).attr('min') * 1){
+          $(this).val($(this).attr('min') * 1)
+        }
+      })
+
+      $(".input_point_ladder").each((index,element)=>{
+        total_point = total_point + (element.value * 1)
+      })
+
+      $("#total_point").text("Tổng Số Điểm: "+total_point)
+  });
+}
+
 function setPointByExaminer(){
 
-  let point;
-
-  $('.point_button').on('click', function () {
-    $('.point_button').css('background-color', 'white')
-    this.style.backgroundColor = "rgba(255, 255, 255, 0.5)"
-    point = this.getAttribute('data-point');
-
-  })
-
-  $("#submit").on('click', function(event){
+  $(".point_caculator").on('submit', function(event){
+    event.preventDefault();
     if(confirm("Xác nhận chấm điểm cho phần thi này")){
+      let total_point = 0;
+      $(".input_point_ladder").each((index,element)=>{
+        total_point = total_point + (element.value * 1)
+      })
+
       const formSetPointCandidate = new FormData();
       formSetPointCandidate.append("id_candidate", $('#candidate_infor').attr('data-candidate'));
-      formSetPointCandidate.append("point", point);
+      formSetPointCandidate.append("point", total_point);
       $.ajax({
         beforeSend: function (xhr) {
             xhr.setRequestHeader ("Authorization",localStorage.getItem('token'));
@@ -188,5 +234,7 @@ function setPointByExaminer(){
 logut();
 togleCaculator();
 getExaminerInformation();
+getPointLadderInformation();
+setTotalPoint();
 setPointByExaminer();
 getMessageFromServer();

@@ -51,9 +51,8 @@ GameService.createNewGame = async function (name_game, background,max_vote, arr_
         return false;
     }
    
-    arrPointLadder.forEach(async (point_ladder) => {
-        await PointLadderService.createPointLadder(point_ladder.title, point_ladder.max_point);
-    });
+    
+    await PointLadderService.createPointLadder(arrPointLadder);
 
     return result;
    } catch (error) {
@@ -86,12 +85,10 @@ GameService.createNewGame = async function (name_game, background,max_vote, arr_
         if(arrPointLadder.length == 0 || arrPointLadder == null){
             return false;
         }
-       
-        await PointLadderService.deletePointLadder();
 
-        arrPointLadder.forEach(async (point_ladder) => {
-            await PointLadderService.createPointLadder(point_ladder.title, point_ladder.max_point);
-        });
+        await PointLadderService.deletePointLadder();
+        
+        await PointLadderService.createPointLadder(arrPointLadder);
 
         return true;
     }catch(err){

@@ -7,6 +7,7 @@ const path = require('path');
 const sharp = require('sharp');
 const fs = require('fs')
 const jwt = require('jsonwebtoken');
+const PointLadderService = require("./point_ladder.service");
 
 
 const ExaminerModel = database.examiner;
@@ -116,9 +117,25 @@ ExaminerService.setPoint = async function(id_candidate,examiner_username,point){
         if(examiner == null){
             return false
         }
-        // if(point >10){
-        //     return false;
-        // }
+        const max_point = await PointLadderService.getMaxPointOfCurrentGame()
+        if(point > max_point.total_max_point){
+            return false;
+        }
+
+        const isPointExit = await PointModel.findAll({
+            where:{
+                id_game: gameData.id_game,
+                id_candidate: id_candidate,
+                id_examiner:examiner.id_examiner,
+            }
+        })
+
+        console.log(isPointExit)
+
+        if(isPointExit.length > 0){
+            return false
+        }
+
         await PointModel.create({
             id_candidate: id_candidate,
             id_examiner: examiner.id_examiner,
