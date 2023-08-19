@@ -168,6 +168,9 @@ function updateListVoteDashBoard(){
         $(".list_vote").css("display", "none")
         return;
       }
+      $(".total_status").css("display", "none")
+      $(".content").css("display", "none")
+
       var listVoteData = data.data.listCandidateTypeList;
       $('.footer').css('display', 'none');
       $('.body_list_vote_component').empty();
@@ -175,17 +178,16 @@ function updateListVoteDashBoard(){
         $('.body_list_vote_component').append(`
         <div class="list_vote_candidate">
             <div class="list_vote_candidate_header">
-                <img src="/template/image/${candidate.avatar}" alt="" class="examiner_avatar">
-                <p class="list_vote_ratting">${candidate.ratting}</p>
+                <img src="/template/image/${candidate.avatar}" alt="" class="list_vote_avatar">
             </div>
             <div class="list_vote_candidate_body">
                 <h4 class="list_vote_candidate_fullname">${candidate.fullname}</h4>
                 <p class="list_vote_candidate_title">${candidate.title}</p>
             </div>
+            <p class="list_vote_ratting">${candidate.ratting}</p>
         </div>
         `)
       });
-
     },
     error: function(data){
       $(".list_vote").css("display", "none")
@@ -195,6 +197,6 @@ function updateListVoteDashBoard(){
 
 openConnectionToServer();
 updateNumberOfVoteDashBoard();
-updateListVoteDashBoard();
 getInformationCurrentGame();
+updateListVoteDashBoard();
 getMessageFromServer();

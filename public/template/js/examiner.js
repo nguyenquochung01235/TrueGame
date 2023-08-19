@@ -94,7 +94,7 @@ function getPointLadderInformation(){
             $('.form_body_point_ladder').append(`
               <div class="point_ladder_component">
                 <p>${point_ladder.title}<br><small>(Tối đa: ${point_ladder.max_point})</small></p>
-                <input required class="input_point_ladder" type="number" step="0.5" min="0" max="${point_ladder.max_point}" placeholder="0">
+                <input required class="input_point_ladder" type="number" step="0.1" min="0" max="${point_ladder.max_point}" placeholder="0">
               </div>
             `);
           });
@@ -107,6 +107,9 @@ function getPointLadderInformation(){
 }
 
 function getInformationCurrentGame(){
+    $(".input_point_ladder").each(()=>{
+        $(this).val(0)
+    })
     $.ajax({
         beforeSend: function (xhr) {
             xhr.setRequestHeader ("Authorization",localStorage.getItem('token'));

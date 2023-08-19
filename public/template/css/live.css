@@ -90,13 +90,14 @@ body{
 }
 
 .no_current_candidate{
-    background-color: #f7ad19;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 8px;
     border-top: 5px solid white;
     min-width: 36%;
     display: none;
     margin-top: 20px;
+    margin-left: 12px;
 
 }
 .no_current_candidate > .candidate > h2{
@@ -106,11 +107,13 @@ body{
 
 
 .current_candidate{
-    background-color: #f7ad19;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 8px;
     border-top: 5px solid white;
     margin-top: 20px;
+    margin-left: 12px;
+    margin-right: 12px;
 }
 
 .current_candidate_header{
@@ -152,7 +155,7 @@ body{
     margin-top: 10px;
     align-items: center;
     justify-content: space-around;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255);
     border-radius: 5px;
 }
 
@@ -178,8 +181,7 @@ body{
 }
 
 .total_status{
-    background-color: #f7ad19;
-    border-top: 5px solid white;
+    /* background-color: #f7ad19; */
     border-radius: 8px;
 
 }
@@ -191,7 +193,6 @@ body{
 
 
 .current_status{
-    border-top: 2px solid white;
     padding: 10px 5px;
     display: flex;
     justify-content: space-around;
@@ -202,13 +203,13 @@ body{
 .status_component{
     display: flex;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 2px 10px;
     border-top: 3px solid white;
     border-radius: 5px;
     margin: 5px;
     box-sizing: border-box;
-    width: 45%;
+    width: 48%;
 }
 
 
@@ -264,19 +265,18 @@ body{
 
 .examiner{
    margin: 5px;
-   border: 3px solid #f7ad19;
+   border: 3px solid rgba(255, 255, 255, 0.8);
    border-radius: 5px;
    width: 180px;
    height: 100%;
-   background-color: #f7ad19;
+   background-color: rgba(255, 255, 255, 0.8);
 }
 
 .examiner_header{
     display: flex;
     align-items: center;
     /* justify-content: center; */
-    background-color: #f7ad19;
-    border-bottom: 1px solid white;
+    border-bottom: 2px solid #053f5c;
     padding: 5px;
 }
 
@@ -287,21 +287,24 @@ body{
     margin-right: 10px;
 }
 .examiner_point{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 40px;
     font-weight: 800;
-    background-color: #f7ad19;
+    background-color: #053f5c;
     padding: 10px 0px;
     border-radius: 5px;
     width: 80px;
+    height: 60px;
     text-align: center;
-    /* color: white; */
+    color: white;
 }
 
 
 
 .examiner_bottom{
     padding: 20px 5px;
-    background-color: #f7ad19;
 }
 
 .examiner_fullname{
@@ -309,7 +312,19 @@ body{
 }
 
 .list_vote{
-    margin: 20px;
+    position: absolute;
+    z-index: 10;
+    top:0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.list_vote_component{
+    width: 40%;
 }
 
 .header_list_vote_component > h3 {
@@ -321,55 +336,63 @@ body{
 
 .list_vote_candidate{
    margin-top: 10px;
-   margin-right: 10px;
-   border: 3px solid #f7ad19;
-   border-radius: 5px;
-   width: 180px;
-   height: 100%;
-   background-color: #f7ad19;
+   border: 3px solid rgba(255, 255, 255, 0.8);
+   border-radius: 45px;
+   height: fit-content;
+   width: inherit;
+   background-color: rgba(255, 255, 255,1);
+   display: flex;
+   /* padding: 10px; */
+   align-items: center;
 }
 
 .list_vote_candidate_header{
     display: flex;
     align-items: center;
     /* justify-content: center; */
-    background-color: #f7ad19;
-    border-bottom: 1px solid white;
-    padding: 5px;
+    /* background-color: #f7ad19; */
+}
+
+.list_vote_avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
 }
 
 .list_vote_ratting{
     font-size: 30px;
     font-weight: 800;
-    background-color: #f7ad19;
-    padding: 10px 0px;
-    border-radius: 5px;
-    width: 80px;
+    /* background-color: #f7ad19; */
     text-align: center;
     /* color: white; */
+    margin: 0px 20px;
 }
 
 .body_list_vote_component{
+    padding: 10px;
+    margin-top: 10vh;
     display: flex;
-    overflow-y: hidden;
-    overflow-x: scroll;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
     /* justify-content: center; */
     align-items: center;
+    width: 100%;
+    height: 80vh;
     /* padding: 10px; */
-    height: 190px;
 }
 
 .list_vote_candidate_body{
-    padding: 20px 5px;
-    background-color: #f7ad19;
+    display: flex;
+    width: 100%;
 }
 
 .list_vote_candidate_fullname{
-    margin-bottom: 5px;
+    margin: 0px 20px;
 }
 
 .list_vote_candidate_title{
-    margin-top: 20px;
+    margin-right: 10px;
 }
 
 @keyframes fade-out {

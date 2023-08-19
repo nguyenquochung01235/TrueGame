@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 17, 2023 lúc 01:45 PM
--- Phiên bản máy phục vụ: 10.4.22-MariaDB
--- Phiên bản PHP: 8.0.15
+-- Host: localhost
+-- Generation Time: Aug 19, 2023 at 02:38 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `true_game`
+-- Database: `true_game`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `candidate`
+-- Table structure for table `candidate`
 --
 
 CREATE TABLE `candidate` (
@@ -38,12 +38,12 @@ CREATE TABLE `candidate` (
   `type` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `examiner`
+-- Table structure for table `examiner`
 --
 
 CREATE TABLE `examiner` (
@@ -53,15 +53,16 @@ CREATE TABLE `examiner` (
   `fullname` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
+  `hidden` int(11) NOT NULL DEFAULT 0,
   `id_game` bigint(20) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `game`
+-- Table structure for table `game`
 --
 
 CREATE TABLE `game` (
@@ -74,24 +75,24 @@ CREATE TABLE `game` (
   `max_vote` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `game_examiner`
+-- Table structure for table `game_examiner`
 --
 
 CREATE TABLE `game_examiner` (
   `id` bigint(20) NOT NULL,
   `id_examiner` bigint(20) NOT NULL,
   `id_game` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `game_master`
+-- Table structure for table `game_master`
 --
 
 CREATE TABLE `game_master` (
@@ -102,10 +103,10 @@ CREATE TABLE `game_master` (
   `expired` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `game_master`
+-- Dumping data for table `game_master`
 --
 
 INSERT INTO `game_master` (`id_game_master`, `username`, `password`, `token`, `expired`, `created_at`, `updated_at`) VALUES
@@ -114,7 +115,7 @@ INSERT INTO `game_master` (`id_game_master`, `username`, `password`, `token`, `e
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `point`
+-- Table structure for table `point`
 --
 
 CREATE TABLE `point` (
@@ -125,12 +126,12 @@ CREATE TABLE `point` (
   `point` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `point_ladder`
+-- Table structure for table `point_ladder`
 --
 
 CREATE TABLE `point_ladder` (
@@ -138,108 +139,108 @@ CREATE TABLE `point_ladder` (
   `title` text NOT NULL,
   `max_point` double NOT NULL,
   `id_game` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `candidate`
+-- Indexes for table `candidate`
 --
 ALTER TABLE `candidate`
   ADD PRIMARY KEY (`id_candidate`),
   ADD KEY `id_game` (`id_game`);
 
 --
--- Chỉ mục cho bảng `examiner`
+-- Indexes for table `examiner`
 --
 ALTER TABLE `examiner`
   ADD PRIMARY KEY (`id_examiner`);
 
 --
--- Chỉ mục cho bảng `game`
+-- Indexes for table `game`
 --
 ALTER TABLE `game`
   ADD PRIMARY KEY (`id_game`);
 
 --
--- Chỉ mục cho bảng `game_examiner`
+-- Indexes for table `game_examiner`
 --
 ALTER TABLE `game_examiner`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `game_master`
+-- Indexes for table `game_master`
 --
 ALTER TABLE `game_master`
   ADD PRIMARY KEY (`id_game_master`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Chỉ mục cho bảng `point`
+-- Indexes for table `point`
 --
 ALTER TABLE `point`
   ADD PRIMARY KEY (`id_point`);
 
 --
--- Chỉ mục cho bảng `point_ladder`
+-- Indexes for table `point_ladder`
 --
 ALTER TABLE `point_ladder`
   ADD PRIMARY KEY (`id_point_ladder`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `candidate`
+-- AUTO_INCREMENT for table `candidate`
 --
 ALTER TABLE `candidate`
-  MODIFY `id_candidate` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_candidate` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT cho bảng `examiner`
+-- AUTO_INCREMENT for table `examiner`
 --
 ALTER TABLE `examiner`
-  MODIFY `id_examiner` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_examiner` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT cho bảng `game`
+-- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id_game` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_game` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT cho bảng `game_examiner`
+-- AUTO_INCREMENT for table `game_examiner`
 --
 ALTER TABLE `game_examiner`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `game_master`
+-- AUTO_INCREMENT for table `game_master`
 --
 ALTER TABLE `game_master`
   MODIFY `id_game_master` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `point`
+-- AUTO_INCREMENT for table `point`
 --
 ALTER TABLE `point`
-  MODIFY `id_point` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id_point` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
--- AUTO_INCREMENT cho bảng `point_ladder`
+-- AUTO_INCREMENT for table `point_ladder`
 --
 ALTER TABLE `point_ladder`
-  MODIFY `id_point_ladder` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_point_ladder` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `candidate`
+-- Constraints for table `candidate`
 --
 ALTER TABLE `candidate`
   ADD CONSTRAINT `candidate_ibfk_1` FOREIGN KEY (`id_game`) REFERENCES `game` (`id_game`) ON DELETE CASCADE ON UPDATE CASCADE;

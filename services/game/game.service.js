@@ -169,12 +169,12 @@ GameService.getGameInformation = async function(){
             },
             include:[{
                 model: database.point,
-                attributes: ['point']
+                attributes: ['point','id_candidate']
             },],
             attributes: ['id_candidate', 'fullname', 'title', 'avatar', 'active', 'ratting','type',
                 [sequelize.fn('sum', sequelize.col('point')), 'total_point'],
             ],
-            group: ['id_candidate', 'points.id_point']
+            group: ['id_candidate', 'points.id_candidate']
         })
     
         const curentCandidate = await CandidateModel.findAll({
@@ -376,12 +376,12 @@ GameService.getGameInformationForExportExcel = async function(){
             },
             include:[{
                 model: database.point,
-                attributes: ['point']
+                attributes: ['point','id_candidate']
             },],
             attributes: ['id_candidate', 'fullname', 'title', 'ratting',
                 [sequelize.fn('sum', sequelize.col('point')), 'total_point'],
             ],
-            group: ['id_candidate', 'points.id_point'],
+            group: ['id_candidate', 'points.id_candidate'],
             order: [
                 ['total_point', 'DESC'],
             ],
