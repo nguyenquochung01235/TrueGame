@@ -164,7 +164,7 @@ body{
 }
 
 .point_caculator{
-    margin-top: 30px;
+    margin-top: 5px;
     height: 82vh;
     display: flex;
     flex-direction: column;

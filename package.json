@@ -2,7 +2,7 @@
   "name": "truegame",
   "version": "1.0.0",
   "description": "True Game Back End Site",
-  "main": "server.js",
+  "main": "vote_server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
