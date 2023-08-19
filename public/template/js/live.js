@@ -79,6 +79,7 @@ function getInformationCurrentGame(){
                   $("#candidate_title").text(curent_candidate.title)
                   $("#candidate_fullname").text(curent_candidate.fullname)
                   $("#candidate_point").text("Tổng Điểm: " + curent_candidate.point)
+
                   $("#candidate_vote").text("Tổng Bình Chọn: "+curent_candidate.ratting)
                 }
 
@@ -99,7 +100,9 @@ function getInformationCurrentGame(){
                     <div class="examiner">
                         <div class="examiner_header">
                             <img src="/template/image/${examiner.examiner.avatar}" alt="" class="examiner_avatar">
-                            <p class="examiner_point">${examiner.point}</p>
+                            <p class="examiner_point">
+                            ${examiner.examiner.hidden == 0 ? examiner.point : '**'}
+                            </p>
                         </div>
                         <div class="examiner_bottom">
                             <h4 class="examiner_fullname">${examiner.examiner.fullname}</h4>
@@ -161,11 +164,11 @@ function updateListVoteDashBoard(){
     processData: false,
     encode: true,
     success: function (data) {
-      if(data == null){
+      if(data.data?.listCandidateTypeList.length == 0){
         $(".list_vote").css("display", "none")
         return;
       }
-      var listVoteData = data.data?.listCandidateTypeList;
+      var listVoteData = data.data.listCandidateTypeList;
       $('.footer').css('display', 'none');
       $('.body_list_vote_component').empty();
       listVoteData.forEach(candidate => {

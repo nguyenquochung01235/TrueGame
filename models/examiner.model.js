@@ -21,6 +21,9 @@ module.exports = (sequelize, Sequelize) => {
         avatar:{
             type: Sequelize.STRING
         },
+        hidden:{
+            type: Sequelize.INTEGER
+        },
         id_game:{
             type: Sequelize.BIGINT
         },

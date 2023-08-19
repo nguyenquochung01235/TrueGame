@@ -713,6 +713,50 @@ function deleteExaminer(){
 })
 }
 
+function hiddenExaminer(){
+  $(".hidden-examiner").on("click", function(event) {
+    // event.preventDefault();
+    let message = "Bạn có muốn ẩn điểm giám khảo này không ?"
+
+    if($(this).is(":checked") == false){
+       message = "Bạn có muốn hiện điểm giám khảo này không ?"
+    }
+    if(confirm(message)){
+    const formHiddenExaminer = new FormData();
+    formHiddenExaminer.append("id_examiner", this.getAttribute('data-user'));
+    $.ajax({
+      beforeSend: function (xhr) {
+          xhr.setRequestHeader ("Authorization",localStorage.getItem('token'));
+      },
+      type: "POST",
+      url: "setting/examiner/hidden",
+      data: formHiddenExaminer,
+      enctype:"multipart/form-data",
+      cache: false,
+      contentType: false,
+      processData: false,
+      encode: true,
+      success: function (data) {
+        const MASTER_DATA = {
+          chanel: "MASTER",
+          token: localStorage.getItem('token'),
+          data: {
+            function: "GET_INFO_GAME"
+          },
+        }
+        ws.send(JSON.stringify(MASTER_DATA));
+        alert(data.message);
+
+      },
+      error: function(data){
+        alert(data.responseJSON.message);
+        window.location.href = data.responseJSON.link
+      }
+    })
+  }
+})
+}
+
 function openConnectionToServer(){
   
   ws.onopen = function(){
@@ -879,6 +923,32 @@ function finishListCandidate(){
 })
 }
 
+function exportReport(){
+  $("#export_report").on("click", function(event) {
+    const formFinishListCandidate = new FormData();
+    $.ajax({
+      beforeSend: function (xhr) {
+          xhr.setRequestHeader ("Authorization",localStorage.getItem('token'));
+      },
+      type: "GET",
+      url: "setting/report",
+      data: formFinishListCandidate,
+      enctype:"multipart/form-data",
+      cache: false,
+      contentType: false,
+      processData: false,
+      encode: true,
+      success: function (data) {
+        window.location = 'setting/report'
+      },
+      error: function(data){
+        alert(data.responseJSON.message);
+        // window.location.href = data.responseJSON.link
+      }
+    })
+})
+}
+
 function getMessageFromServer(){
   ws.addEventListener('message', event => {
 
@@ -930,7 +1000,9 @@ togleUpdateExaminerScreen();
 setAvatarCandidateUpdate();
 updateExaminer();
 deleteExaminer();
+hiddenExaminer();
 startCandidate();
 finishCandidate();
 startListCandidate();
 finishListCandidate();
+exportReport();

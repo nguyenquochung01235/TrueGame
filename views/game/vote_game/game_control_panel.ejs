@@ -262,18 +262,26 @@
                                         </div>
                                         <!-- /.card-body -->
 
-                                        <div class="card-footer">
-                                            <button id="update_game_infor_btn" class="btn btn-success col-sm-4 ">Cập nhật thông tin</button>
-                                              <button 
-                                                <% if (!(gameData.game.active == 0)) { %>
-                                                    style="display: none"
-                                                <% } %>
-                                              class="btn btn-success col-sm-4 float-right" id="game_start_btn">Bắt Đầu Cuộc Thi</button>
+                                        <div class="card-footer" style="display: flex ;justify-content: space-between;">
+                                            <button id="update_game_infor_btn" class="btn btn-success col-sm-4 ">Cập Nhật Thông Tin</button>
+                                             
+                                            <button 
+                                            <% if (!(gameData.game.active == 0)) { %>
+                                                style="display: none"
+                                            <% } %>
+                                            class="btn btn-success col-sm-4 " id="game_start_btn">Bắt Đầu Cuộc Thi</button>
+                                            
+                                            <button id="export_report" 
+                                            <% if (!(gameData.game.active == 1)) { %>
+                                                style="display: none"
+                                            <% } %>
+                                            class="btn btn-success col-sm-3 ">Xuất Báo Cáo</button>
+                                            
                                             <button 
                                                 <% if (!(gameData.game.active == 1)) { %>
                                                     style="display: none"
                                                 <% } %>
-                                            class="btn btn-danger col-sm-4 float-right" id="game_stop_btn">Kết Thúc Cuộc Thi</button>
+                                            class="btn btn-danger col-sm-4 " id="game_stop_btn">Kết Thúc Cuộc Thi</button>
                                         </div>
                                     </div>
                                     <!-- /.card -->
@@ -578,6 +586,7 @@
                                                         <th>Username</th>
                                                         <th>Giám khảo</th>
                                                         <th>Chức danh</th>
+                                                        <th style="width: 100px; text-align: center;">Ẩn điểm</th>
                                                         <th>Cập nhật</th>
                                                     </tr>
                                                 </thead>
@@ -596,6 +605,15 @@
                                                         </td>
                                                         <td>
                                                             <p><%-examiner.title %></p>
+                                                        </td>
+                                                        <td style="text-align: center;">
+                                                            <input 
+                                                                <% if (examiner.hidden == 1) { %>
+                                                                    checked
+                                                                <% } %>
+                                                                type="checkbox" 
+                                                                class="hidden-examiner" 
+                                                                data-user="<%-examiner.id_examiner%>">
                                                         </td>
                                                         <td>
                                                             <button type="submit" data-user="<%-examiner.id_examiner%>" class="btn btn-warning update-examiner">Cập nhật</button>

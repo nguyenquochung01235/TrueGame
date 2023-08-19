@@ -64,6 +64,7 @@ router.get('/setting/info', admin_auth ,async (req, res)=>{
             }))
         }else{
             const gameData = await GameService.getGameInformation()
+            console.log(gameData)
             res.status(200).send(({
                 success: true,
                 message: "Get game info successful",
@@ -409,11 +410,32 @@ router.get('/setting/examiner/:id_examiner', admin_auth ,async (req, res, next)=
     }else{
      res.status(400).send(({
          success: false,
-         message: "Lấy thông tin giám không thành công",
+         message: "Lấy thông tin giám khảo không thành công",
          link:"/vote-game/setting"
      }))
     }
  });
+
+
+ router.post('/setting/examiner/hidden',upload.none() ,admin_auth ,async (req, res, next)=>{
+    console.log(req.body)
+    const examinerData = await ExaminerService.hiddenExaminer(req.body.id_examiner)
+ 
+    if(examinerData != false){
+     res.status(200).send(({
+         success: true,
+         message: "Thay đổi trạng thái ẩn điểm giám khảo thành công",
+         link:"/vote-game/setting",
+         data: examinerData
+     }))
+    }else{
+     res.status(400).send(({
+         success: false,
+         message: "Thay đổi trạng thái ẩn điểm giám khảo không thành công",
+         link:"/vote-game/setting"
+     }))
+    }
+ })
 
 router.post('/setting/examiner/create',upload.single('avatar'), admin_auth ,async (req, res, next)=>{
    const examinerData = await ExaminerService.createExaminer(
@@ -482,15 +504,13 @@ router.post('/setting/examiner/delete',upload.none(), admin_auth ,async (req, re
  });
 
 router.get('/setting/viewer/vote',upload.none() ,async (req, res, next)=>{
-   
     const result = await GameService.getNumberOfVote()
- 
     if(result != false){
      res.status(201).send(({
          success: true,
          message: "Get vote successfull",
          link:"/vote-game/setting",
-         data: result
+         data: result,
      }))
     }else{
      res.status(400).send(({
@@ -502,7 +522,7 @@ router.get('/setting/viewer/vote',upload.none() ,async (req, res, next)=>{
     }
 });
 
-router.get('/setting/viewer/vote/list',upload.none() ,async (req, res, next)=>{
+router.get('/setting/viewer/vote/list',upload.none(),admin_auth ,async (req, res, next)=>{
    
     const result = await CandidateService.getListCandidateTypeListOrderByRattingDESC()
  
@@ -521,5 +541,22 @@ router.get('/setting/viewer/vote/list',upload.none() ,async (req, res, next)=>{
          data: null
      }))
     }
+});
+
+router.get('/setting/report',upload.none(),async (req, res, next)=>{
+    try {
+
+        const report = await GameService.getGameInformationForExportExcel();
+        res.attachment('vote_game_report.xlsx');
+        res.send(report)
+    } catch (error) {
+        res.status(400).send(({
+            success: false,
+            message: "Export Fail",
+            link:"/vote-game/setting",
+            data: null
+        }))
+    }
+    
 });
 module.exports = router;

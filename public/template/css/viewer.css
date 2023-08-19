@@ -206,7 +206,7 @@ body{
 .list_vote_candidate{
     margin: 20px;
     width: 90%;
-    height: 75vh;
+    height: 70vh;
     background-color: #053f5c;
     display: flex;
     flex-direction: column;

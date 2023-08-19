@@ -277,5 +277,32 @@ ExaminerService.deleteExaminer = async function(id_examiner) {
     }
 }
 
+ExaminerService.hiddenExaminer = async function(id_examiner) {
+    try {
+        const examiner = await ExaminerModel.findOne({
+            where: {
+                id_examiner: id_examiner
+            }
+        })
+        
+        if(examiner.hidden == 0){
+            examiner.set({
+                hidden: 1
+            })
+        }else{
+            examiner.set({
+                hidden: 0
+            })
+        }
+        await examiner.save();
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+
+
 
 module.exports = ExaminerService;
