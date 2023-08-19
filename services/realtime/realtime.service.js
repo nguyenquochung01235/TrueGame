@@ -1,7 +1,7 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken')
 const WebSocket = require('ws');
-const {uuid}  = require('uuidv4');
+const { v4: uuidv4 } = require('uuid')
 
 
 const WebSocketService = {}
@@ -18,7 +18,8 @@ WebSocketService.initialize = function(server){
     const GameMasterListConnection = [];
 
     wss.on('connection', ws => {
-        var viewer_uuid = uuid();
+        var live_uuid = uuidv4();
+        var viewer_uuid = uuidv4();
         console.log("New client connected !")
         ws.on('message', (data, isBinary) => {
             let clientData = isBinary ? data : data.toString()
@@ -30,7 +31,7 @@ WebSocketService.initialize = function(server){
                 switch (clientData.chanel) {
                     
                     case "LIVE":
-                        LiveListConnection.push({viewer_uuid,ws})
+                        LiveListConnection.push({live_uuid,ws})
                         ws.send(JSON.stringify({
                             function: "NUMBER_VIEWER",
                             viewer: ViewerListConnection.length
@@ -103,31 +104,35 @@ WebSocketService.initialize = function(server){
                 switch (clientData.chanel) {
                     
                     case "VIEWER":
+                        switch (clientData.data.function) {
+                            case "VOTE":
+                                LiveListConnection.forEach(live => {
+                                    live.ws.send(JSON.stringify({
+                                        function: "VOTE"
+                                    }))
+                                });
+                                
+                                GameMasterListConnection.forEach(gameMaster => {
+                                    gameMaster.ws.send(JSON.stringify({
+                                        function: "VOTE"
+                                    }))
+                                });
+                            break;
 
-                        LiveListConnection.forEach(live => {
-                            live.ws.send(JSON.stringify({
-                                function: "VOTE"
-                            }))
-                        });
-                        
-                        GameMasterListConnection.forEach(gameMaster => {
-                            gameMaster.ws.send(JSON.stringify({
-                                function: "VOTE"
-                            }))
-                        });
-
-                        LiveListConnection.forEach(live => {
-                            live.ws.send(JSON.stringify({
-                                function: "VOTE_LIST"
-                            }))
-                        });
-
-                        GameMasterListConnection.forEach(gameMaster => {
-                            gameMaster.ws.send(JSON.stringify({
-                                function: "VOTE_LIST"
-                            }))
-                        });
-                        
+                            case "VOTE_LIST":
+                                LiveListConnection.forEach(live => {
+                                    live.ws.send(JSON.stringify({
+                                        function: "VOTE_LIST"
+                                    }))
+                                });
+        
+                                GameMasterListConnection.forEach(gameMaster => {
+                                    gameMaster.ws.send(JSON.stringify({
+                                        function: "VOTE_LIST"
+                                    }))
+                                });
+                            break;
+                        }
                         break;
                     
                     case "EXAMINER":
@@ -205,14 +210,14 @@ WebSocketService.initialize = function(server){
         ws.on('close', ()=>{
             for(var i=0; i<ViewerListConnection.length; i++) {
                 if(ViewerListConnection[i].viewer_uuid == viewer_uuid) {
-                    console.log('Client has disconnected !')
+                    console.log('Viewer has disconnected !')
                     ViewerListConnection.splice(i, 1);
                 }
             }
            
             for(var i=0; i<LiveListConnection.length; i++) {
-                if(LiveListConnection[i].viewer_uuid == viewer_uuid) {
-                    console.log('Client has disconnected !')
+                if(LiveListConnection[i].live_uuid == live_uuid) {
+                    console.log('Live has disconnected !')
                     LiveListConnection.splice(i, 1);
                 }
             }

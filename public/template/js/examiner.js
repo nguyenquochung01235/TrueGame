@@ -181,7 +181,7 @@ function setTotalPoint(){
         total_point = total_point + (element.value * 1)
       })
 
-      $("#total_point").text("Tổng Số Điểm: "+total_point)
+      $("#total_point").text("Tổng Số Điểm: "+total_point.toFixed(1)*1)
   });
 }
 
@@ -197,7 +197,7 @@ function setPointByExaminer(){
 
       const formSetPointCandidate = new FormData();
       formSetPointCandidate.append("id_candidate", $('#candidate_infor').attr('data-candidate'));
-      formSetPointCandidate.append("point", total_point);
+      formSetPointCandidate.append("point", total_point.toFixed(1)*1);
       $.ajax({
         beforeSend: function (xhr) {
             xhr.setRequestHeader ("Authorization",localStorage.getItem('token'));
