@@ -78,7 +78,7 @@ function getInformationCurrentGame(){
                   $("#avatar_candidate").attr("src", `/template/image/${curent_candidate.avatar}`)
                   $("#candidate_title").text(curent_candidate.title)
                   $("#candidate_fullname").text(curent_candidate.fullname)
-                  $("#candidate_point").text("Tổng Điểm: " + curent_candidate.point)
+                  $("#candidate_point").text("Tổng Điểm: " + curent_candidate?.point?.toFixed(1))
 
                   $("#candidate_vote").text("Tổng Bình Chọn: "+curent_candidate.ratting)
                 }

@@ -3,7 +3,7 @@
 *{
     padding: 0;
     margin: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: Helvetica, sans-serif;
     color: #053f5c;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -80,6 +80,11 @@ body{
     width: 20px;
     height: 20px;
 }
+
+#infor_examiner_title{
+    margin-top: 5px;
+}
+
 
 .content{
     display: flex;

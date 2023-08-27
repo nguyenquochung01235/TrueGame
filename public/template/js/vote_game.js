@@ -811,8 +811,8 @@ function updateCurrentExaminerPointDashBoard(){
             </div>
           `)
         });
-        $('#examiner_total_point_dashboard').text(`Tổng Điểm: ${data.data.curent_candidate.point}`)
-        $('#candidate_total_point_dashboard').text(`${data.data.curent_candidate.point}`)
+        $('#examiner_total_point_dashboard').text(`Tổng Điểm: ${(data.data.curent_candidate.point).toFixed(1)*1}`)
+        $('#candidate_total_point_dashboard').text(`${(data.data.curent_candidate.point).toFixed(1)*1}`)
       }
 
     },

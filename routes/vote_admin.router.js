@@ -203,7 +203,7 @@ router.post('/setting/game/status',upload.none(), admin_auth ,async (req, res, n
     const numberCandidate = await CandidateService.countNumberCandidateOfCurrentGame();
     const numberExaminer = await ExaminerService.countNumberExaminerOfCurrentGame();
     
-    if(numberCandidate < MIN_LIMIT_CANDIDATE){
+    if(numberCandidate < MIN_LIMIT_CANDIDATE && req.body.status == 1){
         res.status(400).send(({
             success: false,
             message: "Vui lòng thêm thí sinh để bắt đầu cuộc thi",
@@ -211,7 +211,7 @@ router.post('/setting/game/status',upload.none(), admin_auth ,async (req, res, n
         }))
         return false;
     }
-    if(numberExaminer < MIN_LIMIT_EXAMINER){
+    if(numberExaminer < MIN_LIMIT_EXAMINER && req.body.status == 1){
         res.status(400).send(({
             success: false,
             message: "Vui lòng thêm giám khảo để bắt đầu cuộc thi",

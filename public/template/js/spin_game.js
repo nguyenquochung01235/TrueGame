@@ -157,10 +157,10 @@ setBackgroundButton.addEventListener('click', ()=>{
 // spin whell game
 
 var padding = {top:20, right:40, bottom:0, left:0},
-w = 550 - padding.left - padding.right,
-h = 550 - padding.top  - padding.bottom,
+w = 500 - padding.left - padding.right,
+h = 500 - padding.top  - padding.bottom,
 r = Math.min(w, h)/2,
-duration = 30000;
+duration = 15000;
 rotation = 0,
 oldrotation = 0,
 picked = 100000,
@@ -248,7 +248,9 @@ function renderSpin(){
             return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius -10) +")";
         })
         .attr("text-anchor", "end")
-        .text( function(d, i) {
+        .attr("font-size", "21px")
+        .attr("font-weight", 800)
+	.text( function(d, i) {
             return data[i].label;
         });
 
@@ -273,7 +275,7 @@ function renderSpin(){
         .attr("x", 0)
         .attr("y", 10)
         .attr("text-anchor", "middle")
-        .text("Start")
+        .text("Bắt Đầu")
         .style({"font-size":"20px"});
 
     container.append("text")
@@ -281,7 +283,7 @@ function renderSpin(){
         .attr("x", 0)
         .attr("y", 10)
         .attr("text-anchor", "middle")
-        .text("Stop")
+        .text("Kết Thúc")
         .style({"font-size":"20px"});
     
     document.getElementById("stop_spin").style.display = "none";

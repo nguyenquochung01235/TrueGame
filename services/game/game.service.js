@@ -113,7 +113,7 @@ GameService.setStatusGame = async function (status){
             await game.save();
         } 
         //stop game
-        if(status == 2 && game.active == 1){
+        if(status == 2){
 
             const candidate = await CandidateModel.findOne({
                 where: {
@@ -300,7 +300,8 @@ GameService.getGameInformationForLive = async function(){
         
         const totalCandidate = await CandidateModel.findOne({
             where:{
-                id_game: gameData.id_game
+                id_game: gameData.id_game,
+		type: 'SINGLE'
             },
             attributes: [
                 [sequelize.fn('count', sequelize.col('id_candidate')), 'total_candidate'],
@@ -407,10 +408,12 @@ GameService.getGameInformationForExportExcel = async function(){
             attributes: ['id_point','id_candidate','id_examiner','point',],
             include:[{
                 model: database.examiner,
+		required: true,
                 attributes: ['fullname', 'title']
             },
             {
                 model: database.candidate,
+		required: true,
                 attributes: ['fullname', 'title']
             }],
             order: [

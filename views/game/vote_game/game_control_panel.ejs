@@ -128,7 +128,7 @@
                                     <div class="info-box-content">
                                         <span class="info-box-text">Thí Sinh</span>
                                         <span class="info-box-number">
-                                          <%- gameData.candidate.total %>
+                                          <%-  gameData?.candidate?.total || 0 %>
                                         </span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -263,25 +263,25 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer" style="display: flex ;justify-content: space-between;">
-                                            <button id="update_game_infor_btn" class="btn btn-success col-sm-4 ">Cập Nhật Thông Tin</button>
+                                           <button id="update_game_infor_btn" class="btn btn-success col-sm-4 ">Cập Nhật Thông Tin</button>
                                              
-                                            <button 
-                                            <% if (!(gameData.game.active == 0)) { %>
-                                                style="display: none"
+                                            <% if (gameData.game.active == 0) { %>
+                                                <button class="btn btn-success col-sm-4" id="game_start_btn">Bắt Đầu Cuộc Thi</button>
                                             <% } %>
-                                            class="btn btn-success col-sm-4 " id="game_start_btn">Bắt Đầu Cuộc Thi</button>
                                             
-                                            <button id="export_report" 
-                                            <% if (!(gameData.game.active == 1)) { %>
-                                                style="display: none"
+                                            <% if (gameData.game.active == 1) { %>
+                                                <button id="export_report"  class="btn btn-success col-sm-3 ">Xuất Báo Cáo</button>
                                             <% } %>
-                                            class="btn btn-success col-sm-3 ">Xuất Báo Cáo</button>
                                             
-                                            <button 
-                                                <% if (!(gameData.game.active == 1)) { %>
-                                                    style="display: none"
+                                            <% if (gameData.game.active == 1 ) { %>
+                                                <button class="btn btn-danger col-sm-4 " id="game_stop_btn">Kết Thúc Cuộc Thi</button>
+                                            <% } %>
+
+                                            <% if (gameData.game.active == 0) { %>
+                                                <% if (gameData.candidate.data[0] == null && gameData?.candidateList[0] == null && gameData.examiner.data[0] == null) { %>
+                                                    <button class="btn btn-danger col-sm-3 " id="game_stop_btn">Huỷ Cuộc Thi</button>
                                                 <% } %>
-                                            class="btn btn-danger col-sm-4 " id="game_stop_btn">Kết Thúc Cuộc Thi</button>
+                                            <% } %>                                                                            
                                         </div>
                                     </div>
                                     <!-- /.card -->
@@ -322,7 +322,7 @@
                                                     <div class="info-box-content">
                                                         <span class="info-box-text">Tổng số điểm</span>
                                                         <span id="candidate_total_point_dashboard" class="info-box-number">
-                                                            <%- gameData.curent_candidate.point %>
+                                                            <%- gameData.curent_candidate.point.toFixed(1) ?? 0%>
                                                         </span>
                                                     </div>
                                                     <!-- /.info-box-content -->
@@ -392,7 +392,7 @@
 
                                         </div>
                                         <div class="card-footer">
-                                            <button id="examiner_total_point_dashboard" class="btn btn-success col-12" disabled>Tổng Điểm: <%- gameData.curent_candidate.point %></button>
+                                            <button id="examiner_total_point_dashboard" class="btn btn-success col-12" disabled>Tổng Điểm: <%- gameData.curent_candidate?.point?.toFixed(1) ?? 0 %></button>
                                         </div>
                                     </div>
                                 </div>
