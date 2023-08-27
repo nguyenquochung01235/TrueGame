@@ -460,7 +460,7 @@
                                                                     </span>
                                                                 <% } %>
                                                             </td>
-                                                            <td><span class="badge bg-primary"><%-candidate.dataValues.total_point || 0%></span></td>
+                                                            <td><span class="badge bg-primary"><%- (candidate.dataValues.total_point.toFixed(1) ?? 0) || 0%></span></td>
                                                             <td><span class="badge bg-primary"><%-candidate.ratting%></span></td>
                                                             <td>
                                                                 <button type="submit" data-user="<%-candidate.id_candidate%>" class="btn btn-warning update-candidate">Cập nhật</button>
