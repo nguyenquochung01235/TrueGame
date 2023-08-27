@@ -272,10 +272,6 @@
                                             <% if (gameData.game.active == 1) { %>
                                                 <button id="export_report"  class="btn btn-success col-sm-3 ">Xuất Báo Cáo</button>
                                             <% } %>
-                                            
-                                            <% if (gameData.game.active == 1 ) { %>
-                                                <button class="btn btn-danger col-sm-4 " id="game_stop_btn">Kết Thúc Cuộc Thi</button>
-                                            <% } %>
 
                                             <% if (gameData.game.active == 0) { %>
                                                 <% if (gameData.candidate.data[0] == null && gameData?.candidateList[0] == null && gameData.examiner.data[0] == null) { %>
@@ -398,79 +394,7 @@
                                 </div>
 
                             </div>
-                            <% if (gameData?.candidateList[0]?.active != null) { %>
-                                <div class="row mb-2">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-header bg-success flex">
-                                                <h3 class="card-title font-weight-bold">Danh Sách Bình Chọn</h3>
-                                                <div class="card-tools">
-    
-                                                    <button type="button" class="btn btn-success btn-sm"
-                                                        data-card-widget="collapse" title="Collapse">
-                                                        <i class="fas fa-minus"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <!-- /.card-header -->
-                                            <div class="card-body card-overflow">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 10px">STT</th>
-                                                            <th style="width: 80px; text-align: center;">Avatar</th>
-                                                            <th>Tên thí sinh</th>
-                                                            <th>Tên phần thi</th>
-                                                            <th style="width: 20px">Vote</th>
-                                                            <th style="width: 170px">Cập nhật</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                      <% gameData.candidateList.forEach((candidate,index)=> { %>                                                 
-                                                            <tr>
-                                                                <td><%-index+1%></td>
-                                                                <td><img class="table_avatar"
-                                                                        src="/template/image/<%-candidate.avatar %>" alt="" srcset="">
-                                                                </td>
-                                                                <td>
-                                                                    <p><%-candidate.fullname %></p>
-                                                                </td>
-                                                                <td>
-                                                                    <p><%-candidate.title %></p>
-                                                                </td>
-        
-                                                               
-                                                                <td><span class="badge bg-primary"><%-candidate.ratting%></span></td>
-                                                                <td>
-                                                                    
-                                                                    <button type="submit" data-user="<%-candidate.id_candidate%>" class="btn btn-warning update-candidate">Cập nhật</button>
-                                                                    <button type="submit" data-user="<%-candidate.id_candidate%>" class="btn btn-danger delete-candidate">Xoá</button>
-                                                                </td>
-                                                                
-                                                            </tr>
-                                                      <% }) %>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- /.card-body -->
-                                            <div class="card-footer clearfix">
-                                                <% if (gameData?.candidateList[0]?.active == 0) { %>
-                                                    <button type="submit" class="btn btn-success col-sm-3 float-right" id="start_vote_list">Bắt Đầu Bình Chọn</button>
-    
-                                                <% } %>
-                                                <% if (gameData?.candidateList[0]?.active == 1) { %>
-                                                    <button type="submit" class="btn btn-danger col-sm-3 float-right" id="stop_vote_list">Kết Thúc Bình Chọn</button>
-    
-                                                <% } %>
-                                                <% if (gameData?.candidateList[0]?.active == 2) { %>
-                                                    <button type="submit" disabled class="btn btn-danger col-sm-3 float-right">Đã Kết Thúc Bình Chọn</button>
-    
-                                                <% } %>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <% } %>
+                          
                             
 
                             <div class="row mb-2">
@@ -634,8 +558,85 @@
                                 </div>
                             </div>
 
+                            <% if (gameData?.candidateList[0]?.active != null) { %>
+                                <div class="row mb-2">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header bg-success flex">
+                                                <h3 class="card-title font-weight-bold">Danh Sách Bình Chọn</h3>
+                                                <div class="card-tools">
+    
+                                                    <button type="button" class="btn btn-success btn-sm"
+                                                        data-card-widget="collapse" title="Collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body card-overflow">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 10px">STT</th>
+                                                            <th style="width: 80px; text-align: center;">Avatar</th>
+                                                            <th>Tên thí sinh</th>
+                                                            <th>Tên phần thi</th>
+                                                            <th style="width: 20px">Vote</th>
+                                                            <th style="width: 170px">Cập nhật</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <% gameData.candidateList.forEach((candidate,index)=> { %>                                                 
+                                                            <tr>
+                                                                <td><%-index+1%></td>
+                                                                <td><img class="table_avatar"
+                                                                        src="/template/image/<%-candidate.avatar %>" alt="" srcset="">
+                                                                </td>
+                                                                <td>
+                                                                    <p><%-candidate.fullname %></p>
+                                                                </td>
+                                                                <td>
+                                                                    <p><%-candidate.title %></p>
+                                                                </td>
+        
+                                                               
+                                                                <td><span class="badge bg-primary"><%-candidate.ratting%></span></td>
+                                                                <td>
+                                                                    
+                                                                    <button type="submit" data-user="<%-candidate.id_candidate%>" class="btn btn-warning update-candidate">Cập nhật</button>
+                                                                    <button type="submit" data-user="<%-candidate.id_candidate%>" class="btn btn-danger delete-candidate">Xoá</button>
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                      <% }) %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                            <div class="card-footer clearfix">
+                                                <% if (gameData?.candidateList[0]?.active == 0) { %>
+                                                    <button type="submit" class="btn btn-success col-sm-3 float-right" id="start_vote_list">Bắt Đầu Bình Chọn</button>
+    
+                                                <% } %>
+                                                <% if (gameData?.candidateList[0]?.active == 1) { %>
+                                                    <button type="submit" class="btn btn-danger col-sm-3 float-right" id="stop_vote_list">Kết Thúc Bình Chọn</button>
+    
+                                                <% } %>
+                                                <% if (gameData?.candidateList[0]?.active == 2) { %>
+                                                    <button type="submit" disabled class="btn btn-danger col-sm-3 float-right">Đã Kết Thúc Bình Chọn</button>
+    
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
                             
-
+                            <% if (gameData.game.active == 1 ) { %>
+                                <div class="card-footer clearfix">
+                                    <button class="btn btn-danger col-sm-4 float-right" id="game_stop_btn">Kết Thúc Cuộc Thi</button>
+                                </div>
+                            <% } %>
 
                           </div>
                           <!-- End Game Box -->
